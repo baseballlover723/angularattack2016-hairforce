@@ -4,30 +4,21 @@ import {Observable} from "rxjs/Observable";
 import {Profile} from "../../models/profile";
 
 @Injectable()
-export class LoginService {
+export class ProfileService {
   currentUser: Observable<Profile>;
   loggedIn: boolean;
 
   constructor(private af: AngularFire) {
     this.loggedIn = false;
+    this.getCurrentUser();
   }
 
-  getCurrentUser() {
-    if (this.loggedIn) {
-      return this.currentUser;
-    }
-    this.loadCurrentUser((profile) => {
-      return profile;
-    });
-  }
-
-  private loadCurrentUser(callback) {
+  getCurrentUser(callback = function(profile) {}) {
     if (this.loggedIn) {
       callback(this.currentUser);
       return;
     }
-    this.af.database.object("/profiles/alsjflskejfaasldfj").subscribe(profile => {
-        console.log("got data");
+    this.getProfile("alsjflskejfaasldfj", (profile) => {
         this.currentUser = profile;
         this.loggedIn = true;
         callback(profile);
@@ -44,6 +35,14 @@ export class LoginService {
 
   isLoggedIn() {
     return this.loggedIn;
+  }
+
+  getProfile(id: string, callback = (profile) => {}) {
+    this.af.database.object("/profiles/" + id).subscribe(profile => {
+      console.log("getting profile: " + id);
+      callback(profile);
+      return;
+    });
   }
 
 }

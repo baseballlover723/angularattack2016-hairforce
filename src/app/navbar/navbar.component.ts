@@ -1,7 +1,8 @@
 import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {DashboardComponent} from "../+dashboard"
-import {LoginService} from "../services/login/login.service";
+import {ProfileService} from "../services/profile/profile.service";
+import {Profile} from "../models/profile";
 
 
 @Component({
@@ -10,15 +11,18 @@ import {LoginService} from "../services/login/login.service";
   templateUrl: "navbar.component.html",
   styleUrls: ["navbar.component.css"],
   directives: [DashboardComponent],
-  providers: [LoginService]
+  providers: [ProfileService]
 })
 
 export class NavbarComponent implements OnInit {
-  constructor(private router: Router, private loginService: LoginService) {
+  currentUser: Profile;
+  constructor(private router: Router, private loginService: ProfileService) {
   }
 
   ngOnInit() {
-    this.loginService.getCurrentUser();
+    this.loginService.getCurrentUser((profile) => {
+      this.currentUser = profile;
+    });
   }
 
   onGoToDashboard() {
