@@ -21,7 +21,11 @@ export class NavbarComponent implements OnInit {
   }
 
   onGoToDashboard() {
-  	this.router.navigate(['/dashboard'])
+  	this.router.navigate(['/dashboard']);
+  }
+  
+  onGoToPlan() {
+    this.router.navigate(['/my-plan']);
   }
 
 }
