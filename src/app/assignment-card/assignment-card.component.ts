@@ -11,7 +11,8 @@ export class AssignmentCardComponent implements OnInit {
 
   @Input() assignment: Assignment;
   
-  constructor() {}
+  constructor() {
+  }
 
   ngOnInit() {
   }
