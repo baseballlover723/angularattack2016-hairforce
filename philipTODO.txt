@@ -1,0 +1,9 @@
+Setup google auth
+login
+logout
+sign up
+add assignments to json
+add profile to json
+add workout to json
+make services to get data out
+
