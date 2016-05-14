@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {DashboardComponent} from "../+dashboard"
 import {ProfileService} from "../services/profile/profile.service";
+import {Profile} from "../models/profile";
 
 
 @Component({
@@ -14,11 +15,14 @@ import {ProfileService} from "../services/profile/profile.service";
 })
 
 export class NavbarComponent implements OnInit {
+  currentUser: Profile;
   constructor(private router: Router, private loginService: ProfileService) {
   }
 
   ngOnInit() {
-    this.loginService.getCurrentUser();
+    this.loginService.getCurrentUser((profile) => {
+      this.currentUser = profile;
+    });
   }
 
   onGoToDashboard() {
