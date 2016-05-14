@@ -9,9 +9,11 @@
 	        <div class='iconasdf'><i class="fa fa-ellipsis-v" aria-hidden="true"></i></div>
 	    </div>
       </div>
-      <div class="card-action">
-        <a (click)="startExercise()"><exercise-tile></exercise-tile></a>
-        <a (click)="startExercise()">Linter is useless..... for hackathons..</a>
+      <div class="card-action row">
+        <a class="tile" (click)="startExercise()"><exercise-tile ></exercise-tile></a>
+        <a class="tile" (click)="startExercise()"><exercise-tile [name]="exercises"></exercise-tile></a>
+        <a class="tile" (click)="startExercise()"><exercise-tile></exercise-tile></a>
+        <a class="tile" (click)="startExercise()"><exercise-tile></exercise-tile></a>
       </div>
     </div>
   </div>
