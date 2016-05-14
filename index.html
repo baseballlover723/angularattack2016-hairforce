@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AngularAttack</title>
+  <base href="/angular-attack/>"
+  
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Service worker support is disabled by default.
+       Install the worker script and uncomment to enable.
+       Only enable service workers in production.
+  <script type="text/javascript">
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/worker.js').catch(function(err) {
+        console.log('Error installing service worker: ', err);
+      });
+    }
+  </script>
+  -->
+
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.css" media="screen,projection" />  <!--<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+  <script src="https://use.fontawesome.com/2957e8fff3.js"></script>
+  <script type="text/javascript" src="vendor/jquery/dist/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+
+  <!--<script type="text/javascript" src="vendor/materialize-css/dist/js/materialize.min.js"></script>-->
+
+</head>
+<body>
+  <angular-attack-app>Loading...</angular-attack-app>
+
+  <script src="vendor/es6-shim/es6-shim.js"></script>
+  <script src="vendor/reflect-metadata/Reflect.js"></script>
+  <script src="vendor/systemjs/dist/system.src.js"></script>
+  <script src="vendor/zone.js/dist/zone.js"></script>
+
+  <script>
+    System.import('system-config.js').then(function () {
+      System.import('main');
+    }).catch(console.error.bind(console));
+  </script>
+</body>
+</html>
