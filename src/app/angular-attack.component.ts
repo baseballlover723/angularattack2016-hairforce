@@ -7,6 +7,7 @@ import {SessionListComponent} from "./+session-list/session-list.component";
 import {StatisticsComponent} from "./+statistics/statistics.component";
 import {HomeComponent} from "./+home/home.component";
 import {FooterComponent} from "./footer/footer.component";
+import {ExerciseComponent} from "./+exercise/exercise.component";
 
 @Component({
     moduleId: module.id,
@@ -27,9 +28,8 @@ import {FooterComponent} from "./footer/footer.component";
     {path: '/', component: HomeComponent},
     {path: "/dashboard", component: DashboardComponent},
     {path: '/session', component: SessionListComponent},
-    {path: '/statistics', component: StatisticsComponent}
-
+    {path: '/statistics', component: StatisticsComponent},
+    {path: '/exercises/:id', component: ExerciseComponent}
 ])
-export class AngularAttackAppComponent {
 
-}
+export class AngularAttackAppComponent { }
