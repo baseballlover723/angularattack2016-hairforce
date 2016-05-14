@@ -5,13 +5,13 @@ import {
   expect,
   inject
 } from '@angular/core/testing';
-import { LoginService } from './login.service.ts';
+import { ProfileService } from './profile.service.ts';
 
 describe('Login Service', () => {
-  beforeEachProviders(() => [LoginService]);
+  beforeEachProviders(() => [ProfileService]);
 
   it('should ...',
-      inject([LoginService], (service: LoginService) => {
+      inject([ProfileService], (service: ProfileService) => {
     expect(service).toBeTruthy();
   }));
 });

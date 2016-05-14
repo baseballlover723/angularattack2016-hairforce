@@ -4,7 +4,7 @@ import {Observable} from "rxjs/Observable";
 import {Profile} from "../../models/profile";
 
 @Injectable()
-export class LoginService {
+export class ProfileService {
   currentUser: Observable<Profile>;
   loggedIn: boolean;
 
