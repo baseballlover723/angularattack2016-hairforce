@@ -11,7 +11,7 @@ import { ExerciseTileComponent } from '../exercise-tile';
   directives: [ExerciseTileComponent]
 })
 export class WeekPlanCardComponent implements OnInit {
-  public exercises: String;
+  public exercises: Exercise[];
 
   constructor(private router: Router) {
     this.exercises = "Square up";
