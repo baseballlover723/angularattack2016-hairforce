@@ -1,0 +1,101 @@
+{
+  "profiles" : {
+    "sadlkjfadsjfsasadfsd" : {
+      "name" : "Philip Ross",
+      "workouts" : ["asdfjalskfjles"],
+      "pictureLink" : "https://avatars3.githubusercontent.com/u/7141827",
+      "friends" : ["alsjflskejfaasldfj"]
+    },
+    "alsjflskejfaasldfj" : {
+      "name" : "Jeremy Wright",
+      "workouts" : ["sadfejmekwkefwew", "asvasdvsavaewssefse"],
+      "pictureLink" : "https://scontent-ord1-1.xx.fbcdn.net/v/t1.0-9/13151436_10207842809499962_2203436372500169200_n.jpg?oh=8f2b45cc6736dc80f890c0856c8580fe&oe=57A72DE3",
+      "friends" : ["sadlkjfadsjfsasadfsd", "asnclsjasejfsdlfselkj"]
+    },
+    "asnclsjasejfsdlfselkj" : {
+      "name" : "Andrew Ma",
+      "workouts" : ["439jfajoejfw", "asvasdvsavaewssefse", "sadfejmekwkefwew", "asdfjalskfjles"],
+      "pictureLink" : "https://scontent-ord1-1.xx.fbcdn.net/v/t1.0-9/12794506_10205928644277564_4347630166332558435_n.jpg?oh=006d1a465a31c9e1e58476b105682b6d&oe=57E67B47",
+      "friends" : ["alsjflskejfaasldfj"]
+    }
+  },
+  "workouts" : {
+    "asdfjalskfjles" : {
+      "date" : 1463213218,
+      "assignments" : ["asdfasljflawjfelaj", "basjlkfdsdflasmewefsdf"]
+    },
+    "sadfejmekwkefwew" : {
+      "date" : 1469232000,
+      "assignments" : ["asdfasljflawjfelaj", "basjlkfdsdflasmewefsdf", "asoaesjfoacnlk"]
+    },
+    "asvasdvsavaewssefse" : {
+      "date" : 1463270423,
+      "assignments" : ["basjlkfdsdflasmewefsdf"]
+    },
+    "439jfajoejfw" : {
+      "date" : 1463188800,
+      "assignments" : ["asoaesjfoacnlk", "basjlkfdsdflasmewefsdf", "absdmfasemfalksfasonf"]
+    }
+  },
+  "assignments" : {
+    "asdfasljflawjfelaj" : {
+      "exercise" : "cvdeaghgfdjhfgmnm",
+      "time" : -1,
+      "repetitions" : 10,
+      "sets" : 3,
+      "weight" : 20
+    },
+    "asoaesjfoacnlk" : {
+      "exercise" : "cvdeaghgfdjhfgmnm",
+      "time" : -1,
+      "repetitions" : 25,
+      "sets" : 10,
+      "weight" : 75
+    },
+    "basjlkfdsdflasmewefsdf" : {
+      "exercise" : "jhlkwe3qw4cjkl3452v6",
+      "time" : -1,
+      "repetitions" : 5,
+      "sets" : 3,
+      "weight" : 100
+    },
+    "absdmfasemfalksfasonf" : {
+      "exercise" : "jhlkwe3qw4cjkl3452v6",
+      "time" : -1,
+      "repetitions" : 10,
+      "sets" : 10,
+      "weight" : 35
+    }
+  },
+  "exercises" : {
+    "cvdeaghgfdjhfgmnm" : {
+      "description" : "Hammer Curl",
+      "equipment" : "Dumbell",
+      "instructions" : "With a dumbbell in each hand, stand with your arms hanging at your sides, palms facing each other. Keep your elbows locked into your sides. Your upper body and elbows should remain in the same place during the whole lift. Keeping your palms facing each other, curl the weight in your right hand up in a semi-circle toward your right shoulder. Squeeze the biceps hard at the top of the lift and then slowly lower. Do not turn your wrists during this lift! You can also do one arm at a time and/or alternate.",
+      "intensity" : 2,
+      "name" : "Hammer Curl",
+      "substitutions" : [ "jhlkwe3qw4cjkl3452v6" ],
+      "type" : "strength",
+      "videourl" : "http://videocdn.bodybuilding.com/video/mp4/40000/40021m.mp4"
+    },
+    "gbfhnghfvbnbgfcv" : {
+      "description" : "Cable",
+      "equipment" : "Cable",
+      "instructions" : "Attach the stirrup attachment to two overhead cable pulleys. Stand between them and grasp the handles with an underhand grip. Hold your arms straight out to your sides so your body is forming a \"T\" and put your hands at about the same height as your head. With your elbows staying in the same place, curl your hands toward your shoulders. Your elbows should not go up or down, and they should not go forward! Squeeze for a moment and return to the starting position.",
+      "intensity" : 3,
+      "name" : "Overhead Cable Curl",
+      "type" : "strength",
+      "videourl" : "http://videocdn.bodybuilding.com/video/mp4/40000/41111m.mp4"
+    },
+    "jhlkwe3qw4cjkl3452v6" : {
+      "description" : "barbell curl",
+      "equipment" : "Barbell",
+      "instructions" : "Possibly the best biceps exercise! With your hands shoulder-width apart, grip a barbell with an underhand grip. Stand straight up with your shoulders squared and with your feet shoulder-width apart. Let the bar hang down at arm's length in front of you, with your arms, shoulders and hands in a straight line. WITHOUT leaning back or swinging the weight, curl the bar up toward your chest in an arc. Keep your elbows in the same place and close to your sides. Bring the weight up as high as you can and squeeze the biceps at the top. Lower the weight slowly, resisting all the way down until your arms are nearly straight",
+      "intensity" : 2,
+      "name" : "Barbell Curl",
+      "substitutions" : [ "cvdeaghgfdjhfgmnm" ],
+      "type" : "strength",
+      "videourl" : "http://videocdn.bodybuilding.com/video/mp4/38000/38241m.mp4"
+    }
+  }
+}
