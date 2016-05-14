@@ -1,0 +1,14 @@
+.exercise-tile{
+  width: 400px;
+  height: 300px;
+  display: inline-block;
+
+  img{
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.exercise-tile:hover {
+  cursor: pointer;
+}
