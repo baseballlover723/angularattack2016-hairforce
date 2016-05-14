@@ -32,4 +32,6 @@ import {ExerciseComponent} from "./+exercise/exercise.component";
     {path: '/exercises/:id', component: ExerciseComponent}
 ])
 
-export class AngularAttackAppComponent { }
+export class AngularAttackAppComponent {
+    title = "angular-attack works!";
+}
