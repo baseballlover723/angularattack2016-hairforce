@@ -10,9 +10,7 @@ import { DashboardComponent } from './+dashboard'
   templateUrl: 'angular-attack.component.html',
   styleUrls: ['angular-attack.component.css'],
 
-  directives: [MaterializeDirective, NavbarComponent, DashboardComponent, ROUTER_DIRECTIVES]
-
-,
+  directives: [MaterializeDirective, NavbarComponent, DashboardComponent, ROUTER_DIRECTIVES],
   providers: [ROUTER_PROVIDERS]
 })
 
