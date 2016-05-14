@@ -1,1 +1,10 @@
+<button (click)="testExercise()">Test Exercise</button>
+<button (click)="testExercises()">Test Exercises</button>
+<button (click)="testAllExercises()">Test All Exercises</button>
+<p *ngIf="exercise">{{exercise.name}}</p>
+<ul>
+  <li *ngFor="let e of exercises">
+    {{e.name}}
+  </li>
+</ul>
 <week-plan-card></week-plan-card>

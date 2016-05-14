@@ -9,25 +9,25 @@ import {
 import { ComponentFixture, TestComponentBuilder } from '@angular/compiler/testing';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { ExerciseCardComponent } from './exercise-card.component';
+import { HomeComponent } from './home.component';
 
-describe('Component: ExerciseCard', () => {
+describe('Component: Home', () => {
   let builder: TestComponentBuilder;
 
-  beforeEachProviders(() => [ExerciseCardComponent]);
+  beforeEachProviders(() => [HomeComponent]);
   beforeEach(inject([TestComponentBuilder], function (tcb: TestComponentBuilder) {
     builder = tcb;
   }));
 
-  it('should inject the component', inject([ExerciseCardComponent],
-      (component: ExerciseCardComponent) => {
+  it('should inject the component', inject([HomeComponent],
+      (component: HomeComponent) => {
     expect(component).toBeTruthy();
   }));
 
   it('should create the component', inject([], () => {
-    return builder.createAsync(ExerciseCardComponentTestController)
+    return builder.createAsync(HomeComponentTestController)
       .then((fixture: ComponentFixture<any>) => {
-        let query = fixture.debugElement.query(By.directive(ExerciseCardComponent));
+        let query = fixture.debugElement.query(By.directive(HomeComponent));
         expect(query).toBeTruthy();
         expect(query.componentInstance).toBeTruthy();
       });
@@ -37,10 +37,10 @@ describe('Component: ExerciseCard', () => {
 @Component({
   selector: 'test',
   template: `
-    <app-exercise-card></app-exercise-card>
+    <app-home></app-home>
   `,
-  directives: [ExerciseCardComponent]
+  directives: [HomeComponent]
 })
-class ExerciseCardComponentTestController {
+class HomeComponentTestController {
 }
 

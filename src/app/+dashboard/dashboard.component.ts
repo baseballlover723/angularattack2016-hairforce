@@ -1,6 +1,7 @@
 import {Component, OnInit} from "@angular/core";
-import {MyServiceService} from "../services/my-service/my-service.service";
 import {WeekPlanCardComponent} from "../week-plan-card";
+import {ExerciseService} from "../services/exercise/exercise.service";
+import {Exercise} from "../models/exercise";
 
 
 @Component({
@@ -10,12 +11,35 @@ import {WeekPlanCardComponent} from "../week-plan-card";
   styleUrls: ["dashboard.component.css"],
 
   directives: [WeekPlanCardComponent],
-  providers: [MyServiceService]
+  providers: [ExerciseService]
 })
 export class DashboardComponent implements OnInit {
-  constructor(private myService: MyServiceService){
+  exercise: Exercise;
+  exercises: Exercise[];
+
+  constructor(private exerciseService: ExerciseService) {
   }
 
   ngOnInit() {
   }
+
+  testExercise() {
+    this.exerciseService.getExercise("cvdeaghgfdjhfgmnm").subscribe((exercise) => {
+      this.exercise = exercise;
+    });
+  }
+
+  testExercises() {
+    this.exerciseService.getExercises(["cvdeaghgfdjhfgmnm", "gbfhnghfvbnbgfcv"], (exercises) => {
+      this.exercises = exercises;
+    });
+  }
+
+  testAllExercises() {
+    this.exerciseService.getAllExercises().subscribe((exercises) => {
+      this.exercises = exercises;
+    });
+  }
+
+
 }

@@ -25,12 +25,11 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(["/dashboard"]);
   }
 
+  onGoToStatistics() {
+    this.router.navigate(['/statistics']);
+  }
+
   signOut() {
     this.loginService.logOut();
   }
-
-  onGoToPlan() {
-    this.router.navigate(['/my-plan']);
-  }
-
 }
