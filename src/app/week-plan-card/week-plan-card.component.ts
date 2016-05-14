@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ExerciseTileComponent } from '../exercise-tile';
+import { DashboardComponent } from '../+dashboard';
 
 @Component({
   moduleId: module.id,

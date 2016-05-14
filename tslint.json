@@ -1,7 +1,7 @@
 {
   "rulesDirectory": ["node_modules/codelyzer"],
   "rules": {
-    "max-line-length": [true, 120],
+    "max-line-length": [true, 100],
     "no-inferrable-types": true,
     "class-name": true,
     "comment-format": [
@@ -31,7 +31,7 @@
     ],
     "quotemark": [
       true,
-      "double",
+      "single",
       "avoid-escape"
     ],
     "semicolon": [true, "always"],
