@@ -5,6 +5,8 @@ import {Assignment} from "../models/assignment";
 
 @Injectable()
 export class SingleExercise {
+    
+    
     getAssignment() {
         let exercise = new Exercise();
         let assignment = new Assignment();
