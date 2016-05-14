@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MyServiceService} from "../services/my-service.service";
 import { WeekPlanCardComponent } from '../week-plan-card';
 
 @Component({
@@ -7,13 +8,20 @@ import { WeekPlanCardComponent } from '../week-plan-card';
   templateUrl: 'dashboard.component.html',
   styleUrls: ['dashboard.component.css'],
 
-  directives: [WeekPlanCardComponent]
+  directives: [WeekPlanCardComponent],
+  providers: [MyServiceService]
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() {}
+  constructor(private myService:MyServiceService) {}
 
   ngOnInit() {
+    console.log(this.myService.myFunc());
   }
+
+  testMyService() {
+    console.log(this.myService.myFunc());
+  }
+
 
 }
