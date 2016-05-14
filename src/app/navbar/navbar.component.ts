@@ -9,9 +9,8 @@ import { DashboardComponent } from '../+dashboard'
   templateUrl: 'navbar.component.html',
   styleUrls: ['navbar.component.css'],
   directives: [DashboardComponent],
-
-
 })
+
 export class NavbarComponent implements OnInit {
 
 	
