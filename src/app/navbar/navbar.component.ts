@@ -30,4 +30,8 @@ export class NavbarComponent implements OnInit {
     });
   }
 
+  onGoToPlan() {
+    this.router.navigate(['/my-plan']);
+  }
+
 }

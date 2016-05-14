@@ -23,4 +23,24 @@
       line-height: 25px;
     }
   }
+
+  .exercise-settings {
+    cursor: pointer;
+    font-size: 24px;
+    color: lightgray;
+  }
+}
+
+.card-action {
+  .favorite-exercise {
+    font-size: 28px;
+    color: lightgray;
+    cursor: pointer;
+  }
+
+  .complete-set {
+    font-size: 28px;
+    color: lightgray;
+    cursor: pointer;
+  }
 }

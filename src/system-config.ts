@@ -38,7 +38,10 @@ const barrels: string[] = [
   'app/+dashboard',
   'app/week-plan-card',
   'app/exercise-card',
-  /** @cli-barrel */
+  'app/assignment-list',
+  'app/+my-plan',
+  'app/+session-list',
+  'app/exercise-tile',
 ];
 
 const cliSystemConfigPackages = {
