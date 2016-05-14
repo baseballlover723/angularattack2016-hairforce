@@ -20,4 +20,8 @@ export class ExerciseService {
     });
   }
 
+  getAllExercises() {
+    return this.af.list("/exercises/");
+  }
+
 }
