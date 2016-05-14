@@ -6,7 +6,7 @@ import { ExerciseTileComponent } from '../exercise-tile';
   moduleId: module.id,
   selector: 'week-plan-card',
   templateUrl: 'week-plan-card.component.html',
-  styleUrls: ['week-plan-card.component.css']
+  styleUrls: ['week-plan-card.component.css'],
 
   directives: [ExerciseTileComponent]
 })
