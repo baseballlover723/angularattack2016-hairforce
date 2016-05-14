@@ -26,11 +26,9 @@ export class SessionListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.assignments.push(this.singleAssignmentService.getAssignment());
-    this.assignments.push(this.singleAssignmentService.getAssignment());
-    this.assignments.push(this.singleAssignmentService.getAssignment());
-    this.assignments.push(this.singleAssignmentService.getAssignment());
-
+    // this.assignments.push(this.singleAssignmentService.getAssignment());
+    // this.assignments.push(this.singleAssignmentService.getAssignment());
+    // this.assignments.push(this.singleAssignmentService.getAssignment());
+    // this.assignments.push(this.singleAssignmentService.getAssignment());
   }
-
 }
