@@ -21,7 +21,7 @@ export class LoginService {
     });
   }
 
-  loadCurrentUser(callback) {
+  private loadCurrentUser(callback) {
     if (this.loggedIn) {
       callback(this.currentUser);
       return;
@@ -36,11 +36,10 @@ export class LoginService {
     );
   }
 
-  logOut(callback) {
+  logOut() {
     console.log("logged out");
     this.currentUser = null;
     this.loggedIn = false;
-    callback();
   }
 
   isLoggedIn() {

@@ -26,8 +26,7 @@ export class NavbarComponent implements OnInit {
   }
 
   signOut() {
-    this.loginService.logOut(() => {
-    });
+    this.loginService.logOut();
   }
 
   onGoToPlan() {
