@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import {Workout} from "../models/workout";
+import {Assignment} from "../models/assignment";
 
 @Component({
   moduleId: module.id,
@@ -8,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SessionListComponent implements OnInit {
 
-  constructor() {}
+  @Input() workout: Workout;
+  
+  // Build query to place all assignments here
+  assignments: Assignment[];
+  
 
-  ngOnInit() {
-  }
+  constructor() { }
+
+  ngOnInit() { }
 
 }

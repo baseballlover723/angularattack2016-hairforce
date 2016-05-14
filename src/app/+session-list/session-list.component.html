@@ -1,3 +1,4 @@
-<p>
-  session-list works!
-</p>
+<p>Session-list check</p>
+<div *ngFor="let assignment of assignments" class="container">
+    <app-assignment-card [assignment]="assignment"></app-assignment-card>
+</div>

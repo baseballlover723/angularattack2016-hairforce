@@ -3,8 +3,8 @@ import { MaterializeDirective } from 'angular2-materialize';
 import { NavbarComponent } from './navbar';
 import { Routes, ROUTER_PROVIDERS, ROUTER_DIRECTIVES } from '@angular/router';
 import { DashboardComponent } from './+dashboard'
-import {ExerciseCardComponent} from "./exercise-card/exercise-card.component";
 import {SessionListComponent} from "./+session-list/session-list.component";
+import {StatisticsComponent} from "./+statistics/statistics.component";
 
 @Component({
   moduleId: module.id,
@@ -15,17 +15,15 @@ import {SessionListComponent} from "./+session-list/session-list.component";
   directives: [MaterializeDirective,
     NavbarComponent,
     DashboardComponent,
-    ExerciseCardComponent,
     ROUTER_DIRECTIVES],
-
+    
   providers: [ROUTER_PROVIDERS]
 })
 
 @Routes([
 	{path:"/dashboard",component:DashboardComponent},
-    {path: '/session', component: SessionListComponent}
-
-
+    {path: '/session', component: SessionListComponent},
+    {path: '/statistics', component: StatisticsComponent}
 ])
 export class AngularAttackAppComponent {
   title = 'Team Hairforce';
