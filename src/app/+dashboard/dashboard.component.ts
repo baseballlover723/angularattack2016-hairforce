@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
   }
 
   testExercise() {
-    this.exerciseService.getExercise("cvdeaghgfdjhfgmnm").subscribe((exercise) => {
+    this.exerciseService.getExercise("cvdeaghgfdjhfgmnm", (exercise) => {
       this.exercise = exercise;
     });
   }
@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit {
   }
 
   testAllExercises() {
-    this.exerciseService.getAllExercises().subscribe((exercises) => {
+    this.exerciseService.getAllExercises((exercises) => {
       this.exercises = exercises;
     });
   }
