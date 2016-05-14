@@ -7,16 +7,19 @@ export class ExerciseService {
   constructor(private af: AngularFire) {
   }
 
-  getExercise(id: string) {
-    console.log("getting exercise: " + id);
-    return this.af.object("/exercises/" + id);
+  getExercise(id: string, callback = (exercise) => {}) {
+    this.af.object("/exercises/" + id).subscribe((exercise) => {
+      console.log("getting exercise: " + id);
+      callback(exercise);
+      return;
+    });
   }
 
   getExercises(ids: string[], callback) {
     var exercises = [];
     for (var id in ids) {
       id = ids[id];
-      this.getExercise(id).subscribe((exercise) => {
+      this.getExercise(id, (exercise) => {
         exercises.push(exercise);
         if (ids.length == exercises.length) {
           callback(exercises);
@@ -25,9 +28,12 @@ export class ExerciseService {
     }
   }
 
-  getAllExercises() {
-    console.log("getting all exercises");
-    return this.af.list("/exercises/");
+  getAllExercises(callback = (exercises) => {}) {
+    this.af.list("/exercises/").subscribe((exercises) => {
+      console.log("getting all exercises");
+      callback(exercises);
+      return;
+    });
   }
 
 }
