@@ -3,6 +3,7 @@ import { MaterializeDirective } from 'angular2-materialize';
 import { NavbarComponent } from './navbar';
 import { Routes, ROUTER_PROVIDERS, ROUTER_DIRECTIVES } from '@angular/router';
 import { DashboardComponent } from './+dashboard'
+import {ExerciseCardComponent} from "./exercise-card/exercise-card.component";
 
 @Component({
   moduleId: module.id,
@@ -10,7 +11,7 @@ import { DashboardComponent } from './+dashboard'
   templateUrl: 'angular-attack.component.html',
   styleUrls: ['angular-attack.component.css'],
 
-  directives: [MaterializeDirective, NavbarComponent, DashboardComponent, ROUTER_DIRECTIVES],
+  directives: [MaterializeDirective, NavbarComponent, DashboardComponent, ExerciseCardComponent, ROUTER_DIRECTIVES],
   providers: [ROUTER_PROVIDERS]
 })
 
