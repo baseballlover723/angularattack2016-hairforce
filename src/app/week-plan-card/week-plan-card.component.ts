@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ExerciseTileComponent } from '../exercise-tile';
-import { DashboardComponent } from '../+dashboard';
 
 @Component({
   moduleId: module.id,
@@ -12,8 +11,11 @@ import { DashboardComponent } from '../+dashboard';
   directives: [ExerciseTileComponent]
 })
 export class WeekPlanCardComponent implements OnInit {
+  public exercises: String;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    this.exercises = "Square up";
+  }
 
   ngOnInit() {
   }
