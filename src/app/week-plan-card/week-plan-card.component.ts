@@ -14,7 +14,7 @@ import {MaterializeDirective} from 'angular2-materialize';
   selector: 'week-plan-card',
   templateUrl: 'week-plan-card.component.html',
   styleUrls: ['week-plan-card.component.css'],
-
+  inputs: ['workout'],
   directives: [ExerciseTileComponent],
   providers: [WorkoutService, ExerciseService, AssignmentService, MaterializeDirective]
 })
@@ -29,20 +29,19 @@ export class WeekPlanCardComponent implements OnInit {
 
   ngOnInit() {
     this.exercises = [];
+    console.log(this.workout);
 
-    this.workoutService.getWorkout('439jfajoejfw',(workout) => {
-      this.workout = workout;
-        // for(var a in this.workout.assignments){
-          this.assignmentService.getAssignments(workout.assignments, (assignments) => {
-            this.assignments = assignments;
-            for (let assignment of assignments) {
-              console.log(assignment, assignment.exercise);
-              this.exerciseService.getExercise(assignment.exercise, (exercise) => {
-                this.exercises.push(exercise);
-              });
-            }
-          });
-    });
+    // for(var a in this.workout.assignments){
+    // this.assignmentService.getAssignments(this.workout.assignments, (assignments) => {
+      // this.workouts.assignments = assignments;
+      for (let assignment of this.workout.assignments) {
+        console.log(assignment, assignment.exercise);
+        this.exerciseService.getExercise(assignment.exercise["$key"], (exercise) => {
+          this.exercises.push(exercise);
+        });
+      }
+    // });
+
   }
 
   startSession(){

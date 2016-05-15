@@ -44,17 +44,30 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     console.log("initializing workouts");
     this.workouts = [];
-    for(var i=0; i< 3; i++){
-      console.log(i);
-      this.dailyPlanGeneratorService.genWorkout(((workout)=>{
-        console.log("adding workout!",workout);
-        this.workouts.push(workout);
+    // for(var i=0; i< 3; i++){
+      // console.log(i);
+      this.dailyPlanGeneratorService.genWorkout(((workout1)=>{
+        // console.log("adding workout!",workout);
+        // this.dailyPlanGeneratorService.genWorkout(((workout2)=>{
+        // // console.log("adding workout!",workout);
+        //   this.dailyPlanGeneratorService.genWorkout(((workout3)=>{
+        //     // console.log("adding workout!",workout);
+        //     this.workouts[0] = workout3;
+        //     console.log("WO", this.workouts);
+        //   }));
+        //   this.workouts[1] = workout2;
+        //   console.log("WO", this.workouts);
+        // }));
+        this.workouts[0] = workout1;
         console.log("WO", this.workouts);
       }));
-    }
+    // }
+    
+    
+
     // this.dailyPlanGeneratorService.wow();//genAssignment('strength');
     console.log("finishing workouts?");
-
+    // setTimeout(console.log(this.workouts),5000);
   }
 
 
