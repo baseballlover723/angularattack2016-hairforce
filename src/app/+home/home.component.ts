@@ -1,7 +1,6 @@
 import{ Component, OnInit } from '@angular/core';
 import {ProfileService} from "../services/profile/profile.service";
 import { Router } from '@angular/router';
-import {Profile} from "../models/profile";
 
 @Component({
   moduleId: module.id,
@@ -13,7 +12,7 @@ import {Profile} from "../models/profile";
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router: Router, private profileService: ProfileService) {}
+  constructor(private profileService: ProfileService, private router: Router) {}
 
   ngOnInit() {
   }
