@@ -38,4 +38,17 @@ export class HomeComponent implements OnInit {
   registerUser() {
     this.router.navigate(['/registration']);
   }
+
+  linkFacebook() {
+    this.profileService.linkFacebook();
+  }
+
+  linkGoogle() {
+    this.profileService.linkGoogle();
+  }
+
+  linkGithub() {
+    this.profileService.linkGithub();
+  }
+
 }
