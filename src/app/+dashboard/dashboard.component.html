@@ -4,7 +4,10 @@
             <activity-history></activity-history>
         </div>
         <div class="col s12 m9">
-            <week-plan-card></week-plan-card>
+            <div class="row">
+            	<week-plan-card *ngFor="let w of workouts" [workout]="w"></week-plan-card>
+            </div>
         </div>
     </div>
 </div>
+<!-- <exercise-tile (click)="startExercise(e)" *ngFor="let e of exercises" [exercise]="e"></exercise-tile> -->

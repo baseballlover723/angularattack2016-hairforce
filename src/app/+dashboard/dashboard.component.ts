@@ -11,15 +11,16 @@ import {UserInfoFormComponent} from "../user-info-form/user-info-form.component"
 import {MaterializeDirective} from "angular2-materialize";
 import {ProfileService} from "../services/profile/profile.service";
 import {Router} from '@angular/router';
+import {DailyPlanGeneratorService} from "../services/dailyPlanGenerator/daily-plan-generator.service";
 
 
 @Component({
   moduleId: module.id,
-  selector: "app-dashboard",
+  selector: "dashboard",
   templateUrl: "dashboard.component.html",
   styleUrls: ["dashboard.component.css"],
 
-  providers: [ExerciseService, AssignmentService, WorkoutService,ProfileService],
+  providers: [ExerciseService, AssignmentService, WorkoutService, ProfileService, DailyPlanGeneratorService],
   directives: [
     WeekPlanCardComponent,
     ActivityHistoryComponent,
@@ -28,9 +29,10 @@ import {Router} from '@angular/router';
 
 })
 export class DashboardComponent implements OnInit {
+  public workouts: Workout[];
 
 
-  constructor(private router: Router, private profileService: ProfileService) {
+  constructor(private router: Router, private profileService: ProfileService, private dailyPlanGeneratorService: DailyPlanGeneratorService) {
     if (profileService.getCurrentUser()) {
       this.router.navigate(['/dashboard']);
     } else {
@@ -40,7 +42,33 @@ export class DashboardComponent implements OnInit {
 
 
   ngOnInit() {
+    console.log("initializing workouts");
+    this.workouts = [];
+    // for(var i=0; i< 3; i++){
+      // console.log(i);
+      this.dailyPlanGeneratorService.genWorkout(((workout1)=>{
+        // console.log("adding workout!",workout);
+        // this.dailyPlanGeneratorService.genWorkout(((workout2)=>{
+        // // console.log("adding workout!",workout);
+        //   this.dailyPlanGeneratorService.genWorkout(((workout3)=>{
+        //     // console.log("adding workout!",workout);
+        //     this.workouts[0] = workout3;
+        //     console.log("WO", this.workouts);
+        //   }));
+        //   this.workouts[1] = workout2;
+        //   console.log("WO", this.workouts);
+        // }));
+        this.workouts[0] = workout1;
+        console.log("WO", this.workouts);
+      }));
+    // }
+    
+    
 
+    // this.dailyPlanGeneratorService.wow();//genAssignment('strength');
+    console.log("finishing workouts?");
+    // setTimeout(console.log(this.workouts),5000);
   }
+
 
 }
