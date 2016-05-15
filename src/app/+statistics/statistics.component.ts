@@ -33,16 +33,9 @@ export class StatisticsComponent implements OnInit {
       this.workout = workout;
       let strings = workout.assignments;
       console.log("strings", strings);
-      this.assignmentService.getAssignments(strings, (assignments) => {
-        this.assignments = [];
-        console.log("Assignments gotten", this.assignments);
-        for (let i = 0; i < assignments.length; i++) {
-          this.exerciseService.getExercise(assignments[i].exercise, (exercise) => {
-            var assignment = assignments[i];
-            assignment.exercise = exercise;
-            this.assignments.push(assignment);
-          });
-        }
+      this.assignmentService.getAssignmentsWithObjects(strings, (assignments) => {
+        this.assignments = assignments;
+        console.log("Gotta", this.assignments);
       });
     });
 

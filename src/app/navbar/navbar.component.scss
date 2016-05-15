@@ -8,6 +8,7 @@ nav {
       li {
         height: 64px;
         a {
+          height: inherit;
           font-size: 24px;
 
           .profile-pic-holder {
