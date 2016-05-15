@@ -1,14 +1,15 @@
-
-
 <div class="lander">
     <div class="container">
         <h1>Git Fit</h1>
         <h4>A revolutionary way to workout</h4>
-        <button (click)="onGoogleLogin()" class="btn waves-effect waves-light lighten-1 red"><i class="fa fa-google"></i>Sign in with Google</button>
-        <!--<br />-->
-        <button (click)="onGithubLogin()" class="btn waves-effect grey lighten-3 black-text"><i class="fa fa-github black-text"></i> Sign in with Github</button>
-        <!--<br />-->
-        <button (click)="onFacebookLogin()" class="btn waves-effect blue darken-1"><i class="fa fa-facebook-square"></i>Sign in with Facebook</button>
+
+        <button (click)="onGoogleSignup()" class="btn waves-effect waves-light lighten-1 modal-close red"><i class="fa fa-google left"></i>Sign up with Google</button>
+        <br />
+        <button (click)="onGithubSignup()" class="btn waves-effect grey lighten-3 modal-close black-text"><i class="fa fa-github left black-text"></i> Sign up with Github</button>
+        <br />
+        <button (click)="onFacebookSignup()" class="btn waves-effect blue modal-close darken-1"><i class="fa fa-facebook-square left"></i>Sign up with Facebook</button>
+        <p><a materialize="leanModal" [materializeParams]="[{dismissible: true}]" (click)="onSignIn()" href="#signin-modal" class="white-text">Already a member? Click Here!</a></p>
+
     </div>
 </div>
 

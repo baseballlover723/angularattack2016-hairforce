@@ -35,16 +35,26 @@ export class ProfileService {
     });
   }
 
-  login(profile: Profile, callback = (profile)=> {
-    
+  addNewProfile(profile: Profile, callback = (profileKey) => {
   }) {
+    const promise = this.af.list("/profiles/").push(profile);
+    promise.then(_ => {
+      profile["$key"] = promise.key();
+      callback(profile["$key"]);
+    }).catch(err => {
+      console.log(err);
+      callback(false);
+    });
+  }
+
+
+  login(profile: Profile, callback = (profile)=> {}) {
     ProfileService.currentUser = profile;
     console.log("logged in: " + profile.name);
     callback(profile);
   }
 
-  findProfile(provider: string, uid: string, callback = (profile) => {
-  }) {
+  findProfile(provider: string, uid: string, callback = (profile) => {}) {
     this.af.list("/profiles", {
       query: {
         orderByChild: provider,
@@ -74,7 +84,7 @@ export class ProfileService {
   }
 
   fbLogin(callback = (profile)=> {
-    
+
   }) {
     this.socialLogin("facebook", (authData) => {
       this.findProfile("facebookUid", authData.uid, (profile) => {

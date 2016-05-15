@@ -6,9 +6,14 @@
             <div *ngIf="profileService.getCurrentUser()">
                 <li><a (click)="onGoToAccount()"><i class="fa fa-user"></i> {{profileService.getCurrentUser().name}}</a></li>
                 <li><a (click)="onGoToDashboard()"><i class="fa fa-calendar" aria-hidden="true"></i></a></li>
-                <!--<li><a (click)="onGoToStatistics()"><i class="fa fa-bar-chart" aria-hidden="true"></i></a></li>-->
                 <li><a (click)="signOut()"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+            </div>
+
+            <div *ngIf="profileService.getCurrentUser() == null">
+                <li><a materialize="leanModal" [materializeParams]="[{dismissible: true}]" (click)="onSignIn()" href="#signin-modal"><i class="fa fa-sign-in"></i>Sign In</a></li>
             </div>
         </ul>
     </div>
 </nav>
+
+<app-signin-modal></app-signin-modal>

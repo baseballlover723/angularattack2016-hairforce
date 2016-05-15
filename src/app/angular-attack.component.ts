@@ -29,7 +29,7 @@ import {AccountComponent} from "./+account/account.component";
 @Routes([
     {path: '/', component: HomeComponent},
     {path: "/dashboard", component: DashboardComponent},
-    {path: '/session', component: SessionListComponent},
+    {path: '/session/:id', component: SessionListComponent},
     {path: '/statistics', component: StatisticsComponent},
     {path: '/exercises/:id', component: ExerciseComponent},
     {path: '/registration/:id', component: UserInfoFormComponent},

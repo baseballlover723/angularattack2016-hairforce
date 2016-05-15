@@ -9,4 +9,10 @@ export class Assignment {
     repetitions: number;
     sets: number;
     weight: number;
+
+  constructor(exercise: Exercise, time: number) {
+    this.exercise = exercise["$key"];
+    this.time = time;
+  }
 }
+

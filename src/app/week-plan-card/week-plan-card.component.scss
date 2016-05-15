@@ -5,9 +5,18 @@
 		margin: 0;
 	}
 
+	.card-title {
+		font-size: 3vw;
+	}
+
 	.material-icons {
 		margin-top: 2px;
 		font-size: 24px;
+	}
+
+	.icon:hover {
+		cursor: pointer;
+		opacity: 1;
 	}
 
 	.fa-plus {
@@ -29,9 +38,15 @@
 		height: 24px;
 	}
 
-	.iconasdf {
+	#iconWrapper:hover {
+		cursor: pointer;
+	}
+
+	.icon {
 		display: inline-block;
 		width: 30%;
 		height: 100%;
+		color: white;
+		opacity: 0.6;
 	}
 }

@@ -2,6 +2,9 @@ import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {DashboardComponent} from "../+dashboard";
 import {ProfileService} from "../services/profile/profile.service";
+import {SigninModalComponent} from "../signin-modal/signin-modal.component";
+import {MaterializeDirective} from "angular2-materialize";
+
 
 
 @Component({
@@ -9,7 +12,7 @@ import {ProfileService} from "../services/profile/profile.service";
   selector: "app-navbar",
   templateUrl: "navbar.component.html",
   styleUrls: ["navbar.component.css"],
-  directives: [DashboardComponent],
+  directives: [DashboardComponent, SigninModalComponent, MaterializeDirective],
   providers: [ProfileService]
 })
 

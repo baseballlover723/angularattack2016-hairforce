@@ -17,4 +17,8 @@ export class Exercise {
     weight: number;
     type: string;
     typeUrl: string;
+
+  constructor(name: string) {
+    this.name = name;
+  }
 }

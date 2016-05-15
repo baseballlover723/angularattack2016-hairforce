@@ -1,0 +1,23 @@
+#activity-history {
+  overflow-y: auto;
+  float: left;
+  height: 100%;
+  left: 3.5%;
+  /*max-height: 800px;*/
+
+  #ah-title {
+    color: white;
+    font-size: 2vw;
+  }
+}
+
+#activity-history::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 50px;
+	background-color: #FF0000;
+}
+
+#activity-history::-webkit-scrollbar {
+	width: 6px;
+	background-color: #FF0000;
+}
