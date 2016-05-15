@@ -1,4 +1,21 @@
 <div class="container">
-    <app-exercise-card></app-exercise-card>
+    <app-exercise-card *ngIf="exercise" [exercise]="exercise" [isLoading]="false">
+
+    </app-exercise-card>
+    <div *ngIf="isLoading" style="text-align: center; height: 15vh; margin-top: 15vh;">
+        <div class="preloader-wrapper big active">
+            <div class="spinner-layer spinner-blue-only">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
     <app-similar-exercises></app-similar-exercises>
 </div>

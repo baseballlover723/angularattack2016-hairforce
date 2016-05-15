@@ -1,0 +1,34 @@
+.icon-block {
+  padding: 0 15px;
+}
+
+.icon-block .material-icons {
+  font-size: inherit;
+}
+
+.lander {
+  text-align: center;
+  background-image: url("https://i.ytimg.com/vi/PSOWF0HaqpY/maxresdefault.jpg");
+  height: 80vh;
+
+  .container {
+    padding-top: 30vh;
+
+    h1 {
+      //font-family: 'Open Sans', sans-serif;
+      font-family: 'Raleway', sans-serif;
+      font-size: 80px;
+      font-weight: 500;
+      color: white;
+    }
+
+    h4 {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 42px;
+      font-weight: 100;
+      color: white;
+    }
+  }
+
+
+}

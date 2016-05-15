@@ -13,11 +13,14 @@ import {LocalExerciseService} from "../testdata/exerciseLocalService";
 export class ExerciseCardComponent implements OnInit {
   
   @Input() exercise: Exercise;
+  id: string;
 
   constructor(private localExerciseService: LocalExerciseService) {}
 
   ngOnInit() {
-    this.exercise = this.localExerciseService.getExercise();
+    // this.exercise = this.localExerciseService.getExercise();
   }
+
+  
 
 }

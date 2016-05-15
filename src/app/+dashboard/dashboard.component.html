@@ -22,4 +22,16 @@
     </li>
   </ul>
 </div>
+<h3>Workout</h3>
+<div style="padding-left:30px; border: 2px solid black">
+  <button (click)="testWorkout()">Test Workout</button>
+  <button (click)="testWorkouts()">Test Workouts</button>
+  <button (click)="testAllWorkouts()">Test All Workouts</button>
+  <p *ngIf="workout">{{workout.$key}}</p>
+  <ul>
+    <li *ngFor="let e of workouts">
+      {{e.$key}}
+    </li>
+  </ul>
+</div>
 <week-plan-card></week-plan-card>
