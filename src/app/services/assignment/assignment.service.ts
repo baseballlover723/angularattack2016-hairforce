@@ -9,33 +9,19 @@ export class AssignmentService {
   }
 
   getAssignment(id: string, callback = (assignment) => {}) {
-    // let assignment = this.af.list('/assignments/', {
-    //   query: {
-    //     orderByKey: true,
-    //     equalTo: id
-    //   }
-    // });
-    //
-    // assignment.subscribe(item => {
-    //   console.log("GOT", item);
-    // });
-    // console.log("Retreived", assignment);
-    let assign = this.af.object("/assignments/" + id);
-    let assignmentSubscription = assign.subscribe((assignment: Assignment) => {
+    let sub = this.af.object("/assignments/" + id).subscribe((assignment) => {
+      sub.unsubscribe();
       if (!assignment) {
         callback(false);
         return;
       }
-
       assignment.$key = id;
       callback(assignment);
-      assignmentSubscription.unsubscribe();
       return;
     });
   }
 
   getAssignments(ids: string[], callback = (assignements) => {}) {
-
     var assignments = [];
     for (var index in ids) {
       var id = ids[index];
@@ -53,8 +39,8 @@ export class AssignmentService {
   }
 
   getAllAssignments(callback = (assignments) => {}) {
-    this.af.list("/assignments/").subscribe((assignments) => {
-      console.log("getting all assignments");
+    let sub = this.af.list("/assignments/").subscribe((assignments) => {
+      sub.unsubscribe();
       callback(assignments);
       return;
     });

@@ -8,12 +8,12 @@ export class WorkoutService {
   constructor(private af: AngularFire) {}
 
   getWorkout(id: string, callback = (workout) => {}) {
-    this.af.object("/workouts/" + id).subscribe((workout) => {
+    let sub = this.af.object("/workouts/" + id).subscribe((workout) => {
+      sub.unsubscribe();
       if (!workout) {
         callback(false);
         return;
       }
-      console.log("getting workout: " + id);
       workout.$key = id;
       callback(workout);
       return;
@@ -38,8 +38,8 @@ export class WorkoutService {
   }
 
   getAllWorkouts(callback = (workouts) => {}) {
-    this.af.list("/workouts/").subscribe((workouts) => {
-      console.log("getting all workouts");
+    let sub = this.af.list("/workouts/").subscribe((workouts) => {
+      sub.unsubscribe();
       callback(workouts);
       return;
     });
@@ -59,7 +59,6 @@ export class WorkoutService {
   updateWorkout(workout: Workout, callback = (workoutKey) => {}) {
     let key = workout["$key"];
     delete workout["$key"];
-    // console.log(workout);
     const promise = this.af.object("/workouts/" + key).update(workout);
     promise.then(_ => {
       callback(key);
