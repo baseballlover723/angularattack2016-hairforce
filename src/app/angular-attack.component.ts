@@ -28,7 +28,7 @@ import {UserInfoFormComponent} from "./user-info-form/user-info-form.component";
 @Routes([
     {path: '/', component: HomeComponent},
     {path: "/dashboard", component: DashboardComponent},
-    {path: '/session', component: SessionListComponent},
+    {path: '/session/:id', component: SessionListComponent},
     {path: '/statistics', component: StatisticsComponent},
     {path: '/exercises/:id', component: ExerciseComponent},
     {path: '/registration', component: UserInfoFormComponent}

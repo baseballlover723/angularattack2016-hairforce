@@ -14,8 +14,9 @@
 		font-size: 24px;
 	}
 
-	icon:hover {
+	.icon:hover {
 		cursor: pointer;
+		opacity: 1;
 	}
 
 	.fa-plus {
@@ -45,5 +46,7 @@
 		display: inline-block;
 		width: 30%;
 		height: 100%;
+		color: white;
+		opacity: 0.6;
 	}
 }

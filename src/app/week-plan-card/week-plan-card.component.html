@@ -6,10 +6,13 @@
         <div id='iconWrapper'>
 	        <div class='icon' (click)="startSession()"><i class="fa fa-play" aria-hidden="true"></i>
           </div>
-	        <div class='icon'><i id ="plus-icon" class="fa fa-plus material-icons" aria-hidden="true"></i>
+	        <!-- <div class='icon'><i id ="plus-icon" class="fa fa-plus material-icons" aria-hidden="true"></i>
+          </div> -->
+	        <div class='icon dropdown-button' data-activates='day-settings'><i class="fa fa-ellipsis-v" aria-hidden="true"></i>
           </div>
-	        <div class='icon'><i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-          </div>
+          <ul id='day-settings' class='dropdown-content'>
+            <li><a href="#!">Mark as complete</a></li>
+          </ul>
 	       </div>
       </div>
       <div class="card-action row" >
