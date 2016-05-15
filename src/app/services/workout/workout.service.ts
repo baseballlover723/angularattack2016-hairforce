@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {AngularFire} from "angularfire2";
+import {Workout} from "../../models/workout";
 
 @Injectable()
 export class WorkoutService {
