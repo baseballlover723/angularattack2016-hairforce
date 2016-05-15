@@ -184,18 +184,10 @@ export class DailyPlanGeneratorService {
 	}
 
 	// Recursive function to deal with Synchronous Callbacks
-	genWorkoutHelper(){
+	genWorkoutHelper(count: number){
 
 	}
  
-	promiseExample(){
-		var focuses = ["cardio", "strength"];
-		for(var i =0; i<focuses.length; i++){
-				var foc = focuses[Math.floor(Math.random() * focuses.length)];
-				console.log("Generating workout for:",foc["$value"]);
-				// plan.push(this.genAssignment(foc["$value"]));
-			}
-	}
 
 
 	genWeekPlan(Person){
