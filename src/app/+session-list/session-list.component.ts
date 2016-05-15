@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {Workout} from "../models/workout";
 import {Assignment} from "../models/assignment";
-import {SingleExercise} from "../testdata/single-exercise";
 import {AssignmentCardComponent} from "../assignment-card";
 import {RouteSegment} from '@angular/router';
 import {WorkoutService} from "../services/workout/workout.service";
