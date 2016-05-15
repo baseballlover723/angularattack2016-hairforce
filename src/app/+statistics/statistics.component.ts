@@ -76,4 +76,9 @@ export class StatisticsComponent implements OnInit {
 
     return totalTime;
   }
+
+  updateFeedback(assignment: Assignment, val: number) {
+    console.log(assignment, val);
+    return assignment.feedback = val;
+  }
 }
