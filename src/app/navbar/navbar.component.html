@@ -6,12 +6,15 @@
             <div *ngIf="profileService.getCurrentUser()">
                 <li><a (click)="onGoToAccount()">
                     <div class="profile-pic-holder">
-                        <div class="profile-pic">
-                            <img src="{{profileService.getCurrentUser().profilePic}}" class="circle" width="36px"
-                                 height="36px">
+                        <div class="profile-pic valign-wrapper">
+                            <img src="{{profileService.getCurrentUser().profilePic}}" class="circle valign" width="36px" />
                         </div>
                     </div>
-                    {{profileService.getCurrentUser().name}}</a></li>
+                    <div class='name-wrapper valign-wrapper'>
+                      <div class='valign name'>{{profileService.getCurrentUser().name}}</div>
+                    </div>
+                  </a>
+                </li>
                 <li><a (click)="onGoToDashboard()"><i class="fa fa-calendar" aria-hidden="true"></i></a></li>
                 <li><a (click)="signOut()"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
             </div>
