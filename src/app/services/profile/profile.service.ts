@@ -5,7 +5,7 @@ import {Profile} from "../../models/profile";
 
 @Injectable()
 export class ProfileService {
-  currentUser: Observable<Profile>;
+  currentUser: Profile;
   loggedIn: boolean;
 
   constructor(private af: AngularFire) {
@@ -13,14 +13,20 @@ export class ProfileService {
     this.getCurrentUser();
   }
 
-  getCurrentUser(callback = function(profile) {}) {
+  getCurrentUser(callback = function (profile) {
+  }) {
     if (this.loggedIn) {
       callback(this.currentUser);
       return;
     }
     this.getProfile("alsjflskejfaasldfj", (profile) => {
+        if (this.isLoggedIn()) {
+          callback(this.currentUser);
+          return;
+        }
         this.currentUser = profile;
         this.loggedIn = true;
+        console.log("logged in");
         callback(profile);
         return;
       }
@@ -40,6 +46,7 @@ export class ProfileService {
   getProfile(id: string, callback = (profile) => {}) {
     this.af.database.object("/profiles/" + id).subscribe(profile => {
       console.log("getting profile: " + id);
+      profile.$key = id;
       callback(profile);
       return;
     });
