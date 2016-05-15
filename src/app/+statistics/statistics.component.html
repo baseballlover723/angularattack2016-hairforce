@@ -1,3 +1,41 @@
-<p>
-  statistics works!
-</p>
+<div class="container statistics-container">
+    <div class="row">
+        <div class="col s12">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">Post-workout Statistics</span>
+                    <div class="card-action">
+                        <div class="row">
+                            <div class="col s3 statistic-obj center-align">
+                                <h2>
+                                    {{calculateComplete()}}%
+                                </h2>
+                                <h5>
+                                    Exercises completed
+                                </h5>
+                            </div>
+
+                            <div class="col s3 statistic-obj center-align">
+                                <h2>
+                                    {{calculatePoundsLifted()}}
+                                </h2>
+                                <h5>
+                                    Pounds Lifted
+                                </h5>
+                            </div>
+
+                            <div class="col s3 statistic-obj center-align">
+                                <h2>
+                                    {{calculateTimeDoingCardio()}}
+                                </h2>
+                                <h5>
+                                    Seconds of cardio
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

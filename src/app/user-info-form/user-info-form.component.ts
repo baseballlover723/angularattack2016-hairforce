@@ -58,18 +58,14 @@ export class UserInfoFormComponent implements OnInit {
 
 
   ngOnInit() {
-    this.profile = this.profileService.getCurrentUser();
-    console.log(this.profile);
-    if (!this.profile) {
-      this.router.navigate(['/']);
-    }
+
     // console.log(this.profile);
   }
 
-  routerCanDeactivate(curr:RouteSegment) {
-    // this.id = curr.getParam('id');
-    // this.profileService.getProfile(this.id, (profile)=> {
-    //   this.profile = profile;
-    // });
+  routerOnActivate(curr:RouteSegment) {
+    this.profile = this.profileService.getCurrentUser();
+    if (!this.profile) {
+      this.router.navigate(['/']);
+    }
   }
 }

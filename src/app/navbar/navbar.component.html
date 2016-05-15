@@ -4,13 +4,21 @@
         <a (click)="onGoToHome()" class="brand-logo hide-on-small-and-down">Git Fit</a>
         <ul id="nav-mobile" class="right">
             <div *ngIf="profileService.getCurrentUser()">
-                <li><a (click)="onGoToAccount()"><i class="fa fa-user"></i> {{profileService.getCurrentUser().name}}</a></li>
+                <li><a (click)="onGoToAccount()">
+                    <div class="profile-pic-holder">
+                        <div class="profile-pic">
+                            <img src="{{profileService.getCurrentUser().profilePic}}" class="circle" width="36px"
+                                 height="36px">
+                        </div>
+                    </div>
+                    {{profileService.getCurrentUser().name}}</a></li>
                 <li><a (click)="onGoToDashboard()"><i class="fa fa-calendar" aria-hidden="true"></i></a></li>
                 <li><a (click)="signOut()"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
             </div>
 
             <div *ngIf="profileService.getCurrentUser() == null">
-                <li><a materialize="leanModal" [materializeParams]="[{dismissible: true}]" (click)="onSignIn()" href="#signin-modal"><i class="fa fa-sign-in"></i>Sign In</a></li>
+                <li><a materialize="leanModal" [materializeParams]="[{dismissible: true}]" (click)="onSignIn()"
+                       href="#signin-modal"><i class="fa fa-sign-in"></i>Sign In</a></li>
             </div>
         </ul>
     </div>

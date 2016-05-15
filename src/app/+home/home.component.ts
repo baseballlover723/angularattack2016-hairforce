@@ -56,6 +56,7 @@ export class HomeComponent implements OnInit {
         profile = new Profile(name, email, profilePic, sex);
         profile.githubUid = authData.uid;
         this.profileService.addNewProfile(profile);
+        this.router.navigate(['/registration']);
       });
     });
 
@@ -75,6 +76,7 @@ export class HomeComponent implements OnInit {
         profile = new Profile(name, email, profilePic, sex);
         profile.googleUid = authData.uid;
         this.profileService.addNewProfile(profile);
+        this.router.navigate(['/registration']);
       });
     });
 
