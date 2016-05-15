@@ -1,12 +1,46 @@
-<!-- Modal Trigger -->
-<!--<a materialize="leanModal" [materializeParams]="[{dismissible: false}]" class="waves-effect waves-light btn modal-trigger" href="#user-info-modal">Modal</a>-->
-<!-- Modal Structure -->
-<div id="user-info-modal" class="modal">
-  <div class="modal-content">
-    <h4>Profile Information</h4>
-    <p>A bunch of text</p>
-  </div>
-  <div class="modal-footer">
-    <a class=" modal-action modal-close waves-effect waves-green btn-flat">Update</a>
-  </div>
+<div class="container">
+
+    <form materialize (ngSubmit)="onSubmit()" class="col s12 user-registration-form">
+
+        <div class="row">
+            <div class="input-field col s12">
+                <select materialize="material_select" [(ngModel)]="model.sex" required>
+                    <option></option>
+                    <option *ngFor="let s of sex" [value]="s">{{s}}</option>
+                </select>
+                <label>What is your gender?</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <select materialize="material_select" [(ngModel)]="model.experience" required>
+                    <option></option>
+                    <option *ngFor="let exp of experience" [value]="exp">{{exp}}</option>
+                </select>
+                <label>How familiar are you with workout equipment?</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <select materialize="material_select" [(ngModel)]="model.muscle" required>
+                    <option></option>
+                    <option *ngFor="let mus of muscle" [value]="mus">{{mus}}</option>
+                </select>
+                <label>How strong would you consider yourself?</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <select materialize="material_select" [(ngModel)]="model.goal" required>
+                    <option></option>
+                    <option *ngFor="let g of goal" [value]="g">{{g}}</option>
+                </select>
+                <label>What is your goal?</label>
+            </div>
+        </div>
+        <button type="submit" class="btn">submit</button>
+    </form>
 </div>

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import{ Component, OnInit } from '@angular/core';
 import {ProfileService} from "../services/profile/profile.service";
+import { Router } from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -11,7 +12,7 @@ import {ProfileService} from "../services/profile/profile.service";
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private profileService: ProfileService) {}
+  constructor(private router: Router, private profileService: ProfileService) {}
 
   ngOnInit() {
   }
@@ -19,15 +20,22 @@ export class HomeComponent implements OnInit {
   // Google authentication
   onGoogleLogin() {
     this.profileService.googleLogin();
+    this.registerUser();
   }
 
   // Github authentication
   onGithubLogin() {
     this.profileService.githubLogin();
+    this.registerUser();
   }
 
   // Facebook authentication
   onFacebookLogin() {
     this.profileService.fbLogin();
+    this.registerUser();
+  }
+
+  registerUser() {
+    this.router.navigate(['/registration']);
   }
 }

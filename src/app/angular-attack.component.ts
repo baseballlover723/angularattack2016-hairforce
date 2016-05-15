@@ -8,6 +8,7 @@ import {StatisticsComponent} from "./+statistics/statistics.component";
 import {HomeComponent} from "./+home/home.component";
 import {FooterComponent} from "./footer/footer.component";
 import {ExerciseComponent} from "./+exercise/exercise.component";
+import {UserInfoFormComponent} from "./user-info-form/user-info-form.component";
 
 @Component({
     moduleId: module.id,
@@ -29,7 +30,8 @@ import {ExerciseComponent} from "./+exercise/exercise.component";
     {path: "/dashboard", component: DashboardComponent},
     {path: '/session', component: SessionListComponent},
     {path: '/statistics', component: StatisticsComponent},
-    {path: '/exercises/:id', component: ExerciseComponent}
+    {path: '/exercises/:id', component: ExerciseComponent},
+    {path: '/registration', component: UserInfoFormComponent}
 ])
 
 export class AngularAttackAppComponent {

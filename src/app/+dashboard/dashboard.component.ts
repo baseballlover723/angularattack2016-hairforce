@@ -17,18 +17,9 @@ import {MaterializeDirective} from "angular2-materialize";
 })
 export class DashboardComponent implements OnInit {
 
-  // Read data off of the profile to see if the user has signed up
-  hasSetupAccount: boolean;
 
   constructor() {
-    console.log($("#user-info-modal"));
-
-    // Set to false initially for testing purposes
-    this.hasSetupAccount = false;
-
-    if (this.hasSetupAccount) {
-      // $('#').openModal();
-    }
+    
   }
  
 
