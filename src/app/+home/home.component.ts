@@ -30,4 +30,17 @@ export class HomeComponent implements OnInit {
   onFacebookLogin() {
     this.profileService.fbLogin();
   }
+
+  linkFacebook() {
+    this.profileService.linkFacebook();
+  }
+
+  linkGoogle() {
+    this.profileService.linkGoogle();
+  }
+
+  linkGithub() {
+    this.profileService.linkGithub();
+  }
+
 }

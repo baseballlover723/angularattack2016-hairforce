@@ -23,7 +23,7 @@ export class ProfileService {
   }) {
     this.af.database.object("/profiles/" + id).subscribe((profile) => {
       console.log("getting profile: " + id);
-      profile.$key = id;
+      (profile).$key = id;
       callback(profile);
       return;
     });
@@ -46,55 +46,80 @@ export class ProfileService {
     });
   }
 
-  fbLogin() {
+  socialLogin(provider: string, callback = (authData) => {}) {
     var ref = new Firebase("https://hairforceattack.firebaseio.com/");
-    ref.authWithOAuthPopup("facebook", (error, authData) => {
-      console.log("auth data. v");
+    var settings = {
+      remember: "sessionOnly",
+      scope: "email,user_likes"
+    };
+    if (provider == "google") {
+      settings.scope = "";
+    }
+    ref.authWithOAuthPopup(provider, (error, authData) => {
+      console.log(provider + " auth data. v");
       console.log(authData);
+      if (!error) {
+        callback(authData);
+      }
+    }, settings);
+  }
+
+  fbLogin() {
+    this.socialLogin("facebook", (authData) => {
       this.findProfile("facebookUid", authData.uid, (profile) => {
         if (!profile) {
           return;
         }
         this.login(profile);
       });
-    }, {
-      remember: "sessionOnly",
-      scope: "email,user_likes"
     });
   }
 
   googleLogin() {
-    var ref = new Firebase("https://hairforceattack.firebaseio.com/");
-    ref.authWithOAuthPopup("google", (error, authData) => {
-      console.log("auth data. v");
-      console.log(authData);
+    this.socialLogin("google", (authData) => {
       this.findProfile("googleUid", authData.uid, (profile) => {
         if (!profile) {
           return;
         }
         this.login(profile);
       });
-    }, {
-      remember: "sessionOnly",
-      scope: ""
     });
   }
 
   githubLogin() {
-    var ref = new Firebase("https://hairforceattack.firebaseio.com/");
-    ref.authWithOAuthPopup("github", (error, authData) => {
-      console.log("auth data. v");
-      console.log(authData);
+    this.socialLogin("github", (authData) => {
       this.findProfile("githubUid", authData.uid, (profile) => {
         if (!profile) {
           return;
         }
         this.login(profile);
       });
-    }, {
-      remember: "sessionOnly",
-      scope: "email,user_likes"
     });
   }
 
+  link(provider: string, callback = (authData) => {}) {
+    if (!ProfileService.currentUser) {
+      callback(false);
+      return;
+    }
+    this.socialLogin(provider, (authData) => {
+      var providerStr = provider + "Uid";
+      var updateData = {};
+      updateData[providerStr] = authData.uid;
+      this.af.object("/profiles/" + ProfileService.currentUser["$key"]).update(updateData);
+      callback(authData);
+    });
+  }
+
+  linkFacebook() {
+    this.link("facebook");
+  }
+
+  linkGoogle() {
+    this.link("google");
+  }
+
+  linkGithub() {
+    this.link("github");
+  }
 }
