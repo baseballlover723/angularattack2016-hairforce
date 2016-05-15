@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
 import {AngularFire} from "angularfire2";
 import {Assignment} from "../../models/assignment";
+import {ExerciseService} from "../exercise/exercise.service";
 
 @Injectable()
 export class AssignmentService {
 
-  constructor(private af: AngularFire) {
+  constructor(private af: AngularFire, private exerciseService: ExerciseService) {
   }
 
   getAssignment(id: string, callback = (assignment) => {}) {
@@ -19,6 +20,15 @@ export class AssignmentService {
       callback(assignment);
       return;
     });
+  }
+
+  getAssignmentWithObject(id: string, callback = (assignment) => {}) {
+      this.getAssignment(id, (assignment) => {
+        this.exerciseService.getExercise(assignment.exercise, (exercise) => {
+          assignment.exercise = exercise;
+          callback(assignment);
+        });
+      });
   }
 
   getAssignments(ids: string[], callback = (assignements) => {}) {
@@ -39,11 +49,50 @@ export class AssignmentService {
     }
   }
 
+  getAssignmentsWithObjects(ids: string[], callback = (assignements) => {}) {
+    var assignments = [];
+    for (var index in ids) {
+      var id = ids[index];
+      this.getAssignment(id, (assignment) => {
+        if (assignment) {
+          this.exerciseService.getExercise(assignment.exercise, (exercise) => {
+            assignment.exercise = exercise;
+            assignments.push(assignment);
+            if (ids.length == assignments.length) {
+              callback(assignments);
+            }
+          });
+        } else {
+          ids.splice(parseInt(index), 1);
+          if (ids.length == assignments.length) {
+            callback(assignments);
+          }
+        }
+      });
+    }
+  }
+
   getAllAssignments(callback = (assignments) => {}) {
     let sub = this.af.list("/assignments/").subscribe((assignments) => {
       sub.unsubscribe();
       callback(assignments);
       return;
+    });
+  }
+
+  getAllAssignmentsWithObjects(callback = (assignments) => {}) {
+    this.getAllAssignments((assignments) => {
+      let count = 0;
+      for (let index in assignments) {
+        let assignment = assignments[index];
+        this.exerciseService.getExercise(assignment.exercise, (exercise) => {
+          assignment.exercise = exercise;
+          count++;
+          if (count == assignments.length) {
+            callback(assignments);
+          }
+        });
+      }
     });
   }
 

@@ -1,7 +1,7 @@
 nav {
-	nav:hover {
-		cursor: pointer;
-	}
+  nav:hover {
+    cursor: pointer;
+  }
   background-color: #2962FF;
   .nav-wrapper {
     ul {
@@ -12,13 +12,25 @@ nav {
 
           .profile-pic-holder {
             display: inline-block;
+            height: 64px;
+
+            .profile-pic {
+              height: 100%;
+            }
           }
           i {
             padding-left: 16px;
             margin-right: 16px;
           }
         }
+
+          .name-wrapper {
+            position: relative;
+            display: inline-block;
+            top: -10px;
+          }
+
+        }
       }
     }
   }
-}
