@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ExerciseTileComponent } from '../exercise-tile';
+import {ExerciseService} from "../services/exercise/exercise.service";
+import {Exercise} from "../models/exercise";
 
 @Component({
   moduleId: module.id,
@@ -13,15 +15,18 @@ import { ExerciseTileComponent } from '../exercise-tile';
 export class WeekPlanCardComponent implements OnInit {
   public exercises: Exercise[];
 
-  constructor(private router: Router) {
-    this.exercises = "Square up";
+  constructor(private router: Router, private exerciseService: ExerciseService) {
+
   }
 
   ngOnInit() {
+    this.exerciseService.getAllExercises((exercises) => {
+      this.exercises = exercises;
+    });
   }
 
-  startExercise(){
-    this.router.navigate(['/session']);
+  startExercise(e){
+    this.router.navigate(['/exercises/'+e.$key]);
   }
 
 }

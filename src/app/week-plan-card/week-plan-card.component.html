@@ -4,16 +4,16 @@
       <div class="card-content white-text">
         <span class="card-title">Card Title Variable</span>
         <div id='iconWrapper'>
-	        <div class='iconasdf'><i class="fa fa-play" aria-hidden="true"></i></div>
-	        <div class='iconasdf'><i id ="plus-icon" class="fa fa-plus material-icons" aria-hidden="true"></i></div>
-	        <div class='iconasdf'><i class="fa fa-ellipsis-v" aria-hidden="true"></i></div>
-	    </div>
+	        <div class='iconasdf'><i class="fa fa-play" aria-hidden="true"></i>
+          </div>
+	        <div class='iconasdf'><i id ="plus-icon" class="fa fa-plus material-icons" aria-hidden="true"></i>
+          </div>
+	        <div class='iconasdf'><i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+          </div>
+	       </div>
       </div>
-      <div class="card-action row">
-        <a class="tile" (click)="startExercise()"><exercise-tile ></exercise-tile></a>
-        <a class="tile" (click)="startExercise()"><exercise-tile [name]="exercises"></exercise-tile></a>
-        <a class="tile" (click)="startExercise()"><exercise-tile></exercise-tile></a>
-        <a class="tile" (click)="startExercise()"><exercise-tile></exercise-tile></a>
+      <div class="card-action row" >
+        <exercise-tile (click)="startExercise(e)" *ngFor="let e of exercises" [exercise]="e" ></exercise-tile>
       </div>
     </div>
   </div>

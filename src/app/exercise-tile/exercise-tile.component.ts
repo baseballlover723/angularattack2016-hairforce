@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Exercise} from "../models/exercise";
 
 @Component({
   moduleId: module.id,
@@ -10,13 +11,14 @@ import { Component, OnInit } from '@angular/core';
 
 export class ExerciseTileComponent implements OnInit {
   public name: String;
-  public exercise: Exercise: 
+  public exercise: Exercise;
 
   constructor() {
     this.name = "Boxing";
   }
 
   ngOnInit() {
+  
   }
 
 
