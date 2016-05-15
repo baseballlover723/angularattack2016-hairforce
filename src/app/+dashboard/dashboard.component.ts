@@ -9,6 +9,8 @@ import {Workout} from "../models/workout";
 import {WorkoutService} from "../services/workout/workout.service";
 import {UserInfoFormComponent} from "../user-info-form/user-info-form.component";
 import {MaterializeDirective} from "angular2-materialize";
+import {ProfileService} from "../services/profile/profile.service";
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -17,18 +19,23 @@ import {MaterializeDirective} from "angular2-materialize";
   templateUrl: "dashboard.component.html",
   styleUrls: ["dashboard.component.css"],
 
-  providers: [ExerciseService, AssignmentService, WorkoutService],
+  providers: [ExerciseService, AssignmentService, WorkoutService,ProfileService],
   directives: [
     WeekPlanCardComponent,
     ActivityHistoryComponent,
     UserInfoFormComponent,
     MaterializeDirective]
+
 })
 export class DashboardComponent implements OnInit {
 
 
-  constructor() {
-
+  constructor(private router: Router, private profileService: ProfileService) {
+    if (profileService.getCurrentUser()) {
+      this.router.navigate(['/dashboard']);
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
 
