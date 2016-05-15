@@ -7,6 +7,7 @@ import {Workout} from '../models/workout';
 import {WorkoutService} from "../services/workout/workout.service";
 import {AssignmentService} from "../services/assignment/assignment.service";
 import {Assignment} from "../models/assignment";
+import {MaterializeDirective} from 'angular2-materialize';
 
 @Component({
   moduleId: module.id,
@@ -15,13 +16,14 @@ import {Assignment} from "../models/assignment";
   styleUrls: ['week-plan-card.component.css'],
 
   directives: [ExerciseTileComponent],
-  providers: [WorkoutService, ExerciseService, AssignmentService]
+  providers: [WorkoutService, ExerciseService, AssignmentService, MaterializeDirective]
 })
 export class WeekPlanCardComponent implements OnInit {
   public exercises: Exercise[];
   private workout: Workout;
 
   constructor(private router: Router, private exerciseService: ExerciseService, private workoutService: WorkoutService, private assignmentService: AssignmentService) {
+
   }
 
   ngOnInit() {

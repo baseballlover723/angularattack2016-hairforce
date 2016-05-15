@@ -3,23 +3,27 @@
         <div class="card-content">
             <span class="card-title">Day 1</span>
             <div id='iconWrapper'>
-                <div class='icon' (click)="startSession()"><i class="fa fa-play" aria-hidden="true"></i>
+                <div class='icon waves-effect waves-light btn' (click)="startSession()"><i class="fa fa-play" aria-hidden="true"></i>
                 </div>
                 <!-- <div class='icon'><i id ="plus-icon" class="fa fa-plus material-icons" aria-hidden="true"></i>
               </div> -->
-                <a class='icon dropdown-button' data-activates='day-settings' dropdown data-hover='true'>
+                <a materialize class='icon dropdown-button waves-effect waves-light btn' href="javascript:void(0)" data-activates='day-settings' dropdown data-hover='true'>
                     <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                 </a>
                 <ul id='day-settings' class='dropdown-content'>
-                    <li><a href="#">Mark as complete</a></li>
+                    <li><a href="#!">Mark as complete</a></li>
                 </ul>
             </div>
         </div>
         <div class="card-action">
             <div class="row">
-                <exercise-tile (click)="startExercise(e)" *ngFor="let e of exercises"
-                               [exercise]="e"></exercise-tile>
+                <exercise-tile (click)="startExercise(e)" *ngFor="let e of exercises" [exercise]="e"></exercise-tile>
             </div>
         </div>
     </div>
 </div>
+<script>
+$( document ).ready(function{
+$(".dropdown-button").dropdown();
+})
+</script>
