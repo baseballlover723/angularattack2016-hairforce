@@ -3,6 +3,8 @@ import {AngularFire} from "angularfire2";
 import {Exercise} from "../../models/exercise";
 import {ExerciseRating} from "../../models/exerciserating";
 import {Assignment} from "../../models/assignment";
+import {Workout} from "../../models/Workout";
+
 import {Profile} from "../../models/profile";
 import {ProfileService} from "../../services/profile/profile.service";
 import {ExerciseService} from "../../services/exercise/exercise.service";
@@ -136,6 +138,7 @@ export class DailyPlanGeneratorService {
 	}
 
 	genAssignmentCB(type: string, cb){
+		// console.log(type);
 		var person = (new ProfileService(this.af)).getCurrentUser();
 
 		// Generate Random Exercise, with the given type
@@ -146,9 +149,10 @@ export class DailyPlanGeneratorService {
 		// Get the target exercise out of the DB
 		var chosenExercise = new Exercise("null");
 		// var possibleExercises = [];
-		// console.log("entering DB Call")
+		// console.log("entering DB Call", person);
 		(new ExerciseService(this.af)).getAllExercises((possibleExercises =>{
 			// console.log("inside the DB Call", possibleExercises);
+
 			var actuallyPossible = []
 			for(var i=0; i<possibleExercises.length; i++){
 				if(possibleExercises[i].type == type){
@@ -175,11 +179,13 @@ export class DailyPlanGeneratorService {
 					// console.log("SUCCESS");
 				}
 			}
-
+			// console.log(chosenExercise)
+			// console.log(chosenRating);
 
 			// Copy Json, modify based on user vars
 			// TODO: reasonable scaling
 			var assign = new Assignment(chosenExercise, 0);
+			// assign["$key"] = 
 			assign.exercise = chosenExercise;
 			assign.time = chosenExercise.time;
 			assign.repetitions = chosenExercise.repetitions;
@@ -189,7 +195,7 @@ export class DailyPlanGeneratorService {
 	        assign.feedback = 0;
 
 
-			console.log(assign);
+			// console.log(assign);
 			cb(assign);
 		}))
 	}
@@ -221,17 +227,25 @@ export class DailyPlanGeneratorService {
 		// TODO: Algorithmically determine pattern of main focus
 
 		(new ExerciseService(this.af)).getAllTypes(((val) =>{
+			// console.log(val);
 			var focuses = val;
 			var mainFocus = focuses[Math.floor(Math.random() * focuses.length)];
 
-			var plan = [];
+			var plan = new Array<Assignment>();
+			// console.log(plan);
 
-			this.genWorkoutHelper(focuses.length, focuses, plan, (()=>{
+			this.genWorkoutHelper(6, focuses, plan, (()=>{
+				// console.log(plan);
+
 				this.genWorkoutHelper(3, [mainFocus], plan, (()=>{
-					console.log("BEFORE SHUFFLING: ", plan)
+					// console.log("BEFORE SHUFFLING: ", plan)
 					var shuffled = this.shuffle(plan);
-					console.log("SHUFFLED: ",shuffled);
-					callb(shuffled);
+					var workout = new Workout();
+					workout.date = 1;
+					workout.assignments = shuffled;
+					workout.intensity = 2;
+					// console.log("workout: ",workout);
+					callb(workout);
 
 				}));
 			}));
@@ -246,11 +260,16 @@ export class DailyPlanGeneratorService {
 
 	// Recursive function to deal with Synchronous Callbacks
 	genWorkoutHelper(count: number, focuses, plan, cb){
+		// console.log(count);
+		// console.log(plan);
 		if(count > 0){
-			console.log("focuses",focuses)
+			// console.log("focuses",focuses)
 			var foc = focuses[Math.floor(Math.random() * focuses.length)];
 			this.genAssignmentCB(foc["$value"], ((val)=>{
+				// console.log("pushin?",val);
 				plan.push(val);
+				// console.log("pushd?",plan);
+
 				this.genWorkoutHelper(count-1, focuses, plan, cb) //count-1
 			}));
 		}
