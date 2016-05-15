@@ -2,6 +2,8 @@ import {Component, OnInit} from "@angular/core";
 import {WeekPlanCardComponent} from "../week-plan-card";
 import {ExerciseService} from "../services/exercise/exercise.service";
 import {Exercise} from "../models/exercise";
+import {AssignmentService} from "../services/assignment/assignment.service";
+import {Assignment} from "../models/assignment";
 
 
 @Component({
@@ -11,13 +13,16 @@ import {Exercise} from "../models/exercise";
   styleUrls: ["dashboard.component.css"],
 
   directives: [WeekPlanCardComponent],
-  providers: [ExerciseService]
+  providers: [ExerciseService, AssignmentService]
 })
 export class DashboardComponent implements OnInit {
   exercise: Exercise;
   exercises: Exercise[];
 
-  constructor(private exerciseService: ExerciseService) {
+  assignment: Assignment;
+  assignments: Assignment[];
+
+  constructor(private exerciseService: ExerciseService, private assignmentService: AssignmentService) {
   }
 
   ngOnInit() {
@@ -38,6 +43,24 @@ export class DashboardComponent implements OnInit {
   testAllExercises() {
     this.exerciseService.getAllExercises((exercises) => {
       this.exercises = exercises;
+    });
+  }
+
+  testAssignment() {
+    this.assignmentService.getAssignment("asdfasljflawjfelaj", (assignment) => {
+      this.assignment = assignment;
+    });
+  }
+
+  testAssignments() {
+    this.assignmentService.getAssignments(["asoaesjfoacnlk", "basjlkfdsdflasmewefsdf"], (assignments) => {
+      this.assignments = assignments;
+    });
+  }
+
+  testAllAssignments() {
+    this.assignmentService.getAllAssignments((assignments) => {
+      this.assignments = assignments;
     });
   }
 

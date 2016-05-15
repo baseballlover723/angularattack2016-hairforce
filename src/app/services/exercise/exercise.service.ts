@@ -10,12 +10,13 @@ export class ExerciseService {
   getExercise(id: string, callback = (exercise) => {}) {
     this.af.object("/exercises/" + id).subscribe((exercise) => {
       console.log("getting exercise: " + id);
+      exercise.$key = id;
       callback(exercise);
       return;
     });
   }
 
-  getExercises(ids: string[], callback) {
+  getExercises(ids: string[], callback = (exercises) => {}) {
     var exercises = [];
     for (var id in ids) {
       id = ids[id];
