@@ -32,10 +32,8 @@ export class StatisticsComponent implements OnInit {
     this.workoutService.getWorkout(this.id,(workout) => {
       this.workout = workout;
       let strings = workout.assignments;
-      console.log("strings", strings);
       this.assignmentService.getAssignmentsWithObjects(strings, (assignments) => {
         this.assignments = assignments;
-        console.log("Gotta", this.assignments);
       });
     });
 
@@ -64,7 +62,6 @@ export class StatisticsComponent implements OnInit {
         totalWeight += (this.assignments[i].weight * this.assignments[i].sets * this.assignments[i].repetitions);
       }
     }
-    console.log("Pounds lifted", totalWeight);
 
   return totalWeight;
 }

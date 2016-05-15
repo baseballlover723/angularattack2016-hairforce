@@ -21,7 +21,7 @@
             <span class="right">{{assignment.weight}} lbs</span>
         </div>
         <div class="card-action">
-            <i (click)="favoriteExercise()" [ngClass]="isFavorite() ? 'yellow-text' : ''" class="fa fa-star favorite-exercise"></i>
+            <i *ngIf="profile" (click)="favoriteExercise()" [ngClass]="isFavorite() ? 'yellow-text' : ''" class="fa fa-star favorite-exercise"></i>
             <i (click)="completeSet()" [ngClass]="assignment.completed ? 'green-text' : ''" class="fa fa-check right complete-set"></i>
         </div>
     </div>

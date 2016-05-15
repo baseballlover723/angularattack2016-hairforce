@@ -29,14 +29,14 @@ export class AssignmentCardComponent implements OnInit {
 
     favoriteExercise() {
         if (this.profile && this.profile.favorites) {
-            var index = this.profile.favorites.indexOf(this.assignment['$key']);
+            var index = this.profile.favorites.indexOf(this.assignment.exercise.$key);
             if (index == -1) {
-                this.profile.favorites.push(this.assignment['$key']);
+                this.profile.favorites.push(this.assignment.exercise.$key);
             } else {
                 this.profile.favorites.splice(index, 1);
             }
         } else {
-            this.profile.favorites = [this.assignment['$key']];
+            this.profile.favorites = [this.assignment.exercise.$key];
         }
 
         this.profileService.updateProfile(this.profile);
@@ -44,7 +44,7 @@ export class AssignmentCardComponent implements OnInit {
 
     isFavorite() {
         if (this.profile && this.profile.favorites) {
-            if (this.profile.favorites.indexOf(this.assignment['$key']) > -1) {
+            if (this.profile.favorites.indexOf(this.assignment.exercise.$key) > -1) {
                 return true;
             }
         }
