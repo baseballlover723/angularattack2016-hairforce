@@ -9,19 +9,33 @@ export class AssignmentService {
   }
 
   getAssignment(id: string, callback = (assignment) => {}) {
-    this.af.object("/assignments/" + id).subscribe((assignment) => {
+    // let assignment = this.af.list('/assignments/', {
+    //   query: {
+    //     orderByKey: true,
+    //     equalTo: id
+    //   }
+    // });
+    //
+    // assignment.subscribe(item => {
+    //   console.log("GOT", item);
+    // });
+    // console.log("Retreived", assignment);
+    let assign = this.af.object("/assignments/" + id);
+    let assignmentSubscription = assign.subscribe((assignment: Assignment) => {
       if (!assignment) {
         callback(false);
         return;
       }
-      console.log("getting assignment: " + id);
+
       assignment.$key = id;
       callback(assignment);
+      assignmentSubscription.unsubscribe();
       return;
     });
   }
 
   getAssignments(ids: string[], callback = (assignements) => {}) {
+
     var assignments = [];
     for (var index in ids) {
       var id = ids[index];
@@ -59,10 +73,13 @@ export class AssignmentService {
 
   updateAssignment(assignment: Assignment, callback = (assignmentKey) => {}) {
     let key = assignment["$key"];
+    let exercisekey = assignment.exercise['$key'];
     delete assignment["$key"];
+    delete assignment.exercise['$key'];
     // console.log(assignment);
     const promise = this.af.object("/assignments/" + key).update(assignment);
     promise.then(_ => {
+      console.log("GOT", key);
       callback(key);
     }).catch(err => {
       console.log(err);

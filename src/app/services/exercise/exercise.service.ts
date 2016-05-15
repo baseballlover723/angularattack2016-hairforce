@@ -10,7 +10,8 @@ export class ExerciseService {
 
   getExercise(id: string, callback = (exercise) => {
   }) {
-    this.af.object("/exercises/" + id).subscribe((exercise) => {
+    let exercisedb = this.af.object('/exercises/' + id);
+    let exerciseSubscription = exercisedb.subscribe((exercise) => {
       if (!exercise) {
         callback(false);
         return;
@@ -18,6 +19,7 @@ export class ExerciseService {
       // console.log("getting exercise: " + id);
       exercise.$key = id;
       callback(exercise);
+      // exerciseSubscription.unsubscribe();
       return;
     });
   }

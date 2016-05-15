@@ -1,41 +1,41 @@
 import { Component, OnInit } from '@angular/core';
 import {Assignment} from "../models/assignment";
 import {Exercise} from "../models/exercise";
+import {Workout} from "../models/workout";
+import {WorkoutService} from "../services/workout/workout.service";
+import {RouteSegment, Router} from '@angular/router';
+import {AssignmentService} from "../services/assignment/assignment.service";
 
 @Component({
   moduleId: module.id,
   selector: 'app-statistics',
   templateUrl: 'statistics.component.html',
-  styleUrls: ['statistics.component.css']
+  styleUrls: ['statistics.component.css'],
+  
+  providers: [WorkoutService, AssignmentService]
 })
 export class StatisticsComponent implements OnInit {
+  
+  private id: string;
 
   private assignments: Assignment[];
-
-  constructor() {}
+  private workout: Workout;
+  
+  constructor(private workoutService: WorkoutService, private assignmentService: AssignmentService, private router: Router) {}
 
   ngOnInit() {
-    let assignment = new Assignment(new Exercise('Power lifts'), null);
-    assignment.completed = true;
-    assignment.weight = 20;
-    assignment.repetitions = 8;
-    assignment.sets = 3;
-    assignment.exercise.type = 'strength';
+  }
 
-    let cassignment = new Assignment(new Exercise('Hammer curls'), null);
-    cassignment.completed = true;
-    cassignment.weight = 30;
-    cassignment.repetitions = 10;
-    cassignment.sets = 3;
-    cassignment.exercise.type = 'strength';
+  routerOnActivate(curr:RouteSegment) {
+    this.id = curr.getParam('id');
+    this.workoutService.getWorkout(this.id,(workout) => {
+      this.workout = workout;
+      let strings = workout.assignments;
+      this.assignmentService.getAssignments(strings, (assignments: Assignment[]) => {
+        this.assignments = assignments;
+      });
+    });
 
-
-    let lassignment = new Assignment(new Exercise('Running'), null);
-    lassignment.completed = true;
-    lassignment.time = 90;
-    lassignment.exercise.type = 'cardio';
-
-    this.assignments = [assignment, assignment, cassignment, lassignment];
   }
 
   calculateComplete() {
@@ -78,7 +78,16 @@ export class StatisticsComponent implements OnInit {
   }
 
   updateFeedback(assignment: Assignment, val: number) {
-    console.log(assignment, val);
     return assignment.feedback = val;
   }
+
+  sendFeedback() {
+
+    for (let j = 0; j < this.assignments.length; j++) {
+      this.assignmentService.updateAssignment(this.assignments[j]);
+    }
+    this.router.navigate(['/']);
+  }
+
+  
 }
