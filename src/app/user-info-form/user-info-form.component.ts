@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FORM_DIRECTIVES} from "@angular/common";
 import {MaterializeDirective} from "angular2-materialize";
+import { RouteSegment } from '@angular/router';
+import {Profile} from "../models/profile";
+import {ProfileService} from "../services/profile/profile.service";
 
 
 @Component({
@@ -9,7 +12,9 @@ import {MaterializeDirective} from "angular2-materialize";
   templateUrl: 'user-info-form.component.html',
   styleUrls: ['user-info-form.component.css'],
 
-  directives: [MaterializeDirective]
+  directives: [MaterializeDirective],
+
+  providers: [ProfileService]
 })
 export class UserInfoFormComponent implements OnInit {
   
@@ -19,7 +24,10 @@ export class UserInfoFormComponent implements OnInit {
   goal: string[];
   model: any;
 
-  constructor() {
+  id: string;
+  profile: Profile;
+
+  constructor(private profileService: ProfileService) {
     this.experience = ["None", "A little", "Some", "A lot", "Everything there is to know"];
     this.sex = ["female", "male"];
     this.muscle = ["None", "A little", "Average", "Well-built", "Bodybuilder"];
@@ -49,5 +57,12 @@ export class UserInfoFormComponent implements OnInit {
 
 
   ngOnInit() {
+  }
+
+  routerOnActivate(curr:RouteSegment) {
+    this.id = curr.getParam('id');
+    this.profileService.getProfile(this.id, (profile)=> {
+      this.profile = profile;
+    });
   }
 }
