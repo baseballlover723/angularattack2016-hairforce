@@ -25,6 +25,10 @@ export class WeekPlanCardComponent implements OnInit {
     });
   }
 
+  startSession(){
+    this.router.navigate(['/session/']);
+  }
+
   startExercise(e){
     this.router.navigate(['/exercises/'+e.$key]);
   }
