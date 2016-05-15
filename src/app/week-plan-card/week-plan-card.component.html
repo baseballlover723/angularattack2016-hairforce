@@ -7,11 +7,11 @@
                 </div>
                 <!-- <div class='icon'><i id ="plus-icon" class="fa fa-plus material-icons" aria-hidden="true"></i>
               </div> -->
-                <a class='icon dropdown-button waves-effect waves-light btn' data-activates='day-settings' dropdown data-hover='true'>
+                <a materialize class='icon dropdown-button waves-effect waves-light btn' href="javascript:void(0)" data-activates='day-settings' dropdown data-hover='true'>
                     <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                 </a>
                 <ul id='day-settings' class='dropdown-content'>
-                    <li><a href="#">Mark as complete</a></li>
+                    <li><a href="#!">Mark as complete</a></li>
                 </ul>
             </div>
         </div>
@@ -22,3 +22,8 @@
         </div>
     </div>
 </div>
+<script>
+$( document ).ready(function{
+$(".dropdown-button").dropdown();
+})
+</script>

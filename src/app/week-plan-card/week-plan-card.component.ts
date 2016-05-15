@@ -23,6 +23,7 @@ export class WeekPlanCardComponent implements OnInit {
   private workout: Workout;
 
   constructor(private router: Router, private exerciseService: ExerciseService, private workoutService: WorkoutService, private assignmentService: AssignmentService) {
+
   }
 
   ngOnInit() {
