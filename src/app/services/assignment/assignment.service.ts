@@ -9,6 +9,10 @@ export class AssignmentService {
 
   getAssignment(id: string, callback = (assignment) => {}) {
     this.af.object("/assignments/" + id).subscribe((assignment) => {
+      if (!assignment) {
+        callback(false);
+        return;
+      }
       console.log("getting assignment: " + id);
       assignment.$key = id;
       callback(assignment);
@@ -18,10 +22,14 @@ export class AssignmentService {
 
   getAssignments(ids: string[], callback = (assignements) => {}) {
     var assignments = [];
-    for (var id in ids) {
-      id = ids[id];
+    for (var index in ids) {
+      var id = ids[index];
       this.getAssignment(id, (assignment) => {
-        assignments.push(assignment);
+        if (assignment) {
+          assignments.push(assignment);
+        } else {
+          ids.splice(parseInt(index), 1);
+        }
         if (ids.length == assignments.length) {
           callback(assignments);
         }
