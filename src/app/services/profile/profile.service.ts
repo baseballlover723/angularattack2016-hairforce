@@ -19,7 +19,9 @@ export class ProfileService {
   }
 
   logOut() {
-    console.log("logged out: " + ProfileService.currentUser.name);
+    if (ProfileService.currentUser) {
+      console.log("logged out: " + ProfileService.currentUser.name);
+    }
     ProfileService.currentUser = null;
   }
 
@@ -33,9 +35,12 @@ export class ProfileService {
     });
   }
 
-  login(profile: Profile) {
+  login(profile: Profile, callback = (profile)=> {
+    
+  }) {
     ProfileService.currentUser = profile;
     console.log("logged in: " + profile.name);
+    callback(profile);
   }
 
   findProfile(provider: string, uid: string, callback = (profile) => {
@@ -68,35 +73,47 @@ export class ProfileService {
     }, settings);
   }
 
-  fbLogin() {
+  fbLogin(callback = (profile)=> {
+    
+  }) {
     this.socialLogin("facebook", (authData) => {
       this.findProfile("facebookUid", authData.uid, (profile) => {
         if (!profile) {
           return;
         }
-        this.login(profile);
+        this.login(profile, (profile)=> {
+          callback(profile);
+        });
       });
     });
   }
 
-  googleLogin() {
+  googleLogin(callback = (profile)=> {
+
+  }) {
     this.socialLogin("google", (authData) => {
       this.findProfile("googleUid", authData.uid, (profile) => {
         if (!profile) {
           return;
         }
-        this.login(profile);
+        this.login(profile, (profile) => {
+          callback(profile);
+        });
       });
     });
   }
 
-  githubLogin() {
+  githubLogin(callback = (profile) => {
+
+  }) {
     this.socialLogin("github", (authData) => {
       this.findProfile("githubUid", authData.uid, (profile) => {
         if (!profile) {
           return;
         }
-        this.login(profile);
+        this.login(profile, (profile) => {
+          callback(profile);
+        });
       });
     });
   }

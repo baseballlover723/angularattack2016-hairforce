@@ -1,6 +1,7 @@
 import{ Component, OnInit } from '@angular/core';
 import {ProfileService} from "../services/profile/profile.service";
 import { Router } from '@angular/router';
+import {Profile} from "../models/profile";
 
 @Component({
   moduleId: module.id,
@@ -19,36 +20,33 @@ export class HomeComponent implements OnInit {
 
   // Google authentication
   onGoogleLogin() {
-    this.profileService.googleLogin();
-    this.registerUser();
+    this.profileService.googleLogin((profile)=> {
+      this.routeUser();
+    });
   }
 
   // Github authentication
   onGithubLogin() {
-    this.profileService.githubLogin();
-    this.registerUser();
+    this.profileService.githubLogin((profile)=> {
+      this.routeUser();
+
+    });
   }
 
   // Facebook authentication
   onFacebookLogin() {
-    this.profileService.fbLogin();
-    this.registerUser();
+    this.profileService.fbLogin((profile)=> {
+      this.routeUser();
+    });
   }
 
-  registerUser() {
-    this.router.navigate(['/registration']);
+  routeUser() {
+    let profile = this.profileService.getCurrentUser();
+    // console.log("MINE", this.profileService.getCurrentUser());
+    if (profile.experience !== null) {
+      this.router.navigate(['/dashboard']);
+    } else {
+      this.router.navigate(['/registration/' + profile['$key']]);
+    }
   }
-
-  linkFacebook() {
-    this.profileService.linkFacebook();
-  }
-
-  linkGoogle() {
-    this.profileService.linkGoogle();
-  }
-
-  linkGithub() {
-    this.profileService.linkGithub();
-  }
-
 }

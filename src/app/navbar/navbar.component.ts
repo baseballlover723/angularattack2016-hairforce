@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
-import {DashboardComponent} from "../+dashboard"
+import {DashboardComponent} from "../+dashboard";
 import {ProfileService} from "../services/profile/profile.service";
 
 
@@ -29,7 +29,16 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/statistics']);
   }
 
+  onGoToHome() {
+    this.router.navigate(['/']);
+  }
+
+  onGoToAccount() {
+    this.router.navigate(['/account']);
+  }
+
   signOut() {
     this.profileService.logOut();
+    this.router.navigate(['/'])
   }
 }

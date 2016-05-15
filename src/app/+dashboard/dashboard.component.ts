@@ -2,6 +2,8 @@ import {Component, OnInit} from "@angular/core";
 import {WeekPlanCardComponent} from "../week-plan-card";
 import {UserInfoFormComponent} from "../user-info-form/user-info-form.component";
 import {MaterializeDirective} from "angular2-materialize";
+import {ProfileService} from "../services/profile/profile.service";
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -13,13 +15,19 @@ import {MaterializeDirective} from "angular2-materialize";
   directives: [
     WeekPlanCardComponent,
     UserInfoFormComponent,
-    MaterializeDirective]
+    MaterializeDirective],
+
+  providers: [ProfileService]
 })
 export class DashboardComponent implements OnInit {
 
 
-  constructor() {
-    
+  constructor(private router: Router, private profileService: ProfileService) {
+    if (profileService.getCurrentUser()) {
+      this.router.navigate(['/dashboard']);
+    } else {
+      this.router.navigate(['/']);
+    }
   }
  
 
