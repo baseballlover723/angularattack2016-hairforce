@@ -4,6 +4,7 @@
 
 export class Exercise {
 
+    $key: string;
     name: string;
     videoUrl: string;
     description: string;

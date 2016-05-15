@@ -15,26 +15,23 @@ export class StatisticsComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    let assignment = new Assignment(null, null);
+    let assignment = new Assignment(new Exercise('Power lifts'), null);
     assignment.completed = true;
     assignment.weight = 20;
     assignment.repetitions = 8;
     assignment.sets = 3;
-    assignment.exercise = new Exercise(null);
     assignment.exercise.type = 'strength';
 
-    let cassignment = new Assignment(null, null);
+    let cassignment = new Assignment(new Exercise('Hammer curls'), null);
     cassignment.completed = true;
     cassignment.weight = 30;
     cassignment.repetitions = 10;
     cassignment.sets = 3;
-    cassignment.exercise = new Exercise(null);
     cassignment.exercise.type = 'strength';
 
 
-    let lassignment = new Assignment(null, null);
+    let lassignment = new Assignment(new Exercise('Running'), null);
     lassignment.completed = true;
-    lassignment.exercise = new Exercise(null);
     lassignment.time = 90;
     lassignment.exercise.type = 'cardio';
 
