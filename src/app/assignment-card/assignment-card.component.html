@@ -21,8 +21,8 @@
             <span class="right">{{assignment.weight}} lbs</span>
         </div>
         <div class="card-action">
-            <i class="fa fa-star favorite-exercise"></i>
-            <i class="fa fa-check right complete-set"></i>
+            <i (click)="favoriteExercise()" class="fa fa-star favorite-exercise"></i>
+            <i (click)="completeSet()" class="fa fa-check right complete-set"></i>
         </div>
     </div>
 </div>

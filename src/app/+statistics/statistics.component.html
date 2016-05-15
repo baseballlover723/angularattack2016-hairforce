@@ -1,3 +1,79 @@
-<p>
-  statistics works!
-</p>
+<div class="container statistics-container">
+    <div class="row">
+        <div class="col s12 hide-on-med-and-down">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">Post-workout Statistics</span>
+                    <div class="card-action">
+                        <div class="row">
+                            <div class="col s4 statistic-obj center-align">
+                                <h2>
+                                    {{calculateComplete()}}%
+                                </h2>
+                                <h5>
+                                    Exercises completed
+                                </h5>
+                            </div>
+
+                            <div class="col s4 statistic-obj center-align">
+                                <h2>
+                                    {{calculatePoundsLifted()}}
+                                </h2>
+                                <h5>
+                                    Pounds Lifted
+                                </h5>
+                            </div>
+
+                            <div class="col s4 statistic-obj center-align">
+                                <h2>
+                                    {{calculateTimeDoingCardio()}}
+                                </h2>
+                                <h5>
+                                    Seconds of cardio
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col s12">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">Give us Feedback!</span>
+                    <div class="card-action">
+                        <div class="row">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th data-field="name">Exercise Name</th>
+                                    <th class="hide-on-small-and-down" data-field="weight">Weight</th>
+                                    <th class="hide-on-small-and-down" data-field="sets">Sets</th>
+                                    <th class="hide-on-small-and-down" data-field="reps">Repititions</th>
+                                    <th class="hide-on-small-and-down" data-field="time">Time</th>
+                                    <th class="feedback-header" data-field="feedback">Feedback</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+
+                                <tr *ngFor="let assignment of assignments">
+                                    <td>{{assignment.exercise.name}}</td>
+                                    <td class="hide-on-small-and-down">{{assignment.weight}}</td>
+                                    <td class="hide-on-small-and-down">{{assignment.sets}}</td>
+                                    <td class="hide-on-small-and-down">{{assignment.repetitions}}</td>
+                                    <td class="hide-on-small-and-down">{{assignment.time}}</td>
+                                    <td class="feedback">
+                                        <i (click)="updateFeedback(assignment, 1)" class="fa fa-thumbs-o-up" [ngClass]="assignment.feedback == 1 ? 'green-text' : ''" ></i>
+                                        <i (click)="updateFeedback(assignment, -1)" class="fa fa-thumbs-o-down" [ngClass]="assignment.feedback == -1 ? 'red-text' : ''"></i></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

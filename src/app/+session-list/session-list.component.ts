@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import {Workout} from "../models/workout";
 import {Assignment} from "../models/assignment";
 import {AssignmentCardComponent} from "../assignment-card";
-import {RouteSegment} from '@angular/router';
+import {RouteSegment, Router} from '@angular/router';
 import {WorkoutService} from "../services/workout/workout.service";
 
 @Component({
@@ -23,7 +23,7 @@ export class SessionListComponent implements OnInit {
   assignments: Assignment[];
 
 
-  constructor(private ws: WorkoutService) {
+  constructor(private ws: WorkoutService, private router: Router) {
     this.assignments = [];
   }
 
@@ -33,6 +33,11 @@ export class SessionListComponent implements OnInit {
     // this.assignments.push(this.singleAssignmentService.getAssignment());
     // this.assignments.push(this.singleAssignmentService.getAssignment());
   }
+
+  finishWorkout() {
+      this.router.navigate(['/statistics/' + this.id]);
+  }
+
 
   routerOnActivate(curr:RouteSegment) {
       this.id = curr.getParam('id');
