@@ -71,7 +71,7 @@ export class ExerciseService {
     }).catch(err => {
       console.log(err);
       callback(false);
-    })
+    });
   }
 
 }
