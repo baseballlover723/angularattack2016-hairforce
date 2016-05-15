@@ -1,7 +1,14 @@
 import {bootstrap} from '@angular/platform-browser-dynamic';
 import {enableProdMode} from '@angular/core';
 import {AngularAttackAppComponent, environment} from './app/';
-import {FIREBASE_PROVIDERS, defaultFirebase} from 'angularfire2';
+import {
+  FIREBASE_PROVIDERS,
+  defaultFirebase,
+  AngularFire,
+  AuthMethods,
+  AuthProviders,
+  firebaseAuthConfig
+} from 'angularfire2';
 
 
 if (environment.production) {
@@ -10,5 +17,5 @@ if (environment.production) {
 
 bootstrap(AngularAttackAppComponent, [
   FIREBASE_PROVIDERS,
-  defaultFirebase('https://hairforceattack.firebaseio.com')
+  defaultFirebase('https://hairforceattack.firebaseio.com'),
 ]);
