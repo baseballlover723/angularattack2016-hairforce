@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
       this.profileService.findProfile("facebookUid", authData.uid, (profile) => {
         if (profile) {
           this.profileService.login(profile);
+          this.router.navigate(['/dashboard']);
           return;
         }
         let name: string = authData.facebook.displayName;
@@ -47,6 +48,7 @@ export class HomeComponent implements OnInit {
       this.profileService.findProfile("githubUid", authData.uid, (profile) => {
         if (profile) {
           this.profileService.login(profile);
+          this.router.navigate(['/dashboard']);
           return;
         }
         let name: string = authData.github.displayName;
@@ -67,6 +69,7 @@ export class HomeComponent implements OnInit {
       this.profileService.findProfile("googleUid", authData.uid, (profile) => {
         if (profile) {
           this.profileService.login(profile);
+          this.router.navigate(['/dashboard']);
           return;
         }
         let name: string = authData.google.displayName;

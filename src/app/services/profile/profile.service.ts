@@ -11,8 +11,21 @@ import {ExerciseService} from "../../services/exercise/exercise.service";
 @Injectable()
 export class ProfileService {
   public static currentUser: Profile;
+  private ref;
 
   constructor(private af: AngularFire) {
+    this.ref = new Firebase("https://hairforceattack.firebaseio.com/");
+    const currentAuth = this.ref.getAuth();
+    if (!ProfileService.currentUser && currentAuth) {
+      this.findProfile(currentAuth.provider + "Uid", currentAuth.uid, (profile) => {
+        if (!profile || ProfileService.currentUser) {
+          return;
+        }
+        this.login(profile, (profile)=> {
+        });
+      });
+    }
+
   }
 
   getCurrentUser() {
@@ -23,6 +36,7 @@ export class ProfileService {
     if (ProfileService.currentUser) {
       console.log("logged out: " + ProfileService.currentUser.name);
     }
+    this.ref.unauth();
     ProfileService.currentUser = null;
   }
 
@@ -69,15 +83,14 @@ export class ProfileService {
   }
 
   socialLogin(provider: string, callback = (authData) => {}) {
-    var ref = new Firebase("https://hairforceattack.firebaseio.com/");
     var settings = {
-      remember: "sessionOnly",
+      remember: "default",
       scope: "email,user_likes"
     };
     if (provider == "google") {
       settings.scope = "";
     }
-    ref.authWithOAuthPopup(provider, (error, authData) => {
+    this.ref.authWithOAuthPopup(provider, (error, authData) => {
       console.log(provider + " auth data. v");
       console.log(authData);
       if (!error) {
@@ -188,7 +201,7 @@ export class ProfileService {
       var updateData = {};
       if(person.ratings){
         updateData["ratings"] = person.ratings;
-      } else { 
+      } else {
         updateData["ratings"] = [];
       }
       // console.log("todo",todo);
