@@ -37,8 +37,11 @@ export class HomeComponent implements OnInit {
         let sex: boolean = authData.facebook.cachedUserProfile.gender != "female";
         profile = new Profile(name, email, profilePic, sex);
         profile.facebookUid = authData.uid;
-        this.profileService.addNewProfile(profile);
-        this.router.navigate(['/registration']);
+        this.profileService.addNewProfile(profile, (profileKey) => {
+          this.profileService.login(profile, () => {
+            this.router.navigate(['/registration']);
+          });
+        });
       });
     });
   }
@@ -57,8 +60,11 @@ export class HomeComponent implements OnInit {
         let sex: boolean = true;
         profile = new Profile(name, email, profilePic, sex);
         profile.githubUid = authData.uid;
-        this.profileService.addNewProfile(profile);
-        this.router.navigate(['/registration']);
+        this.profileService.addNewProfile(profile, (profileKey) => {
+          this.profileService.login(profile, () => {
+            this.router.navigate(['/registration']);
+          });
+        });
       });
     });
 
@@ -78,8 +84,11 @@ export class HomeComponent implements OnInit {
         let sex: boolean = true;
         profile = new Profile(name, email, profilePic, sex);
         profile.googleUid = authData.uid;
-        this.profileService.addNewProfile(profile);
-        this.router.navigate(['/registration']);
+        this.profileService.addNewProfile(profile, (profileKey) => {
+          this.profileService.login(profile, () => {
+            this.router.navigate(['/registration']);
+          });
+        });
       });
     });
 

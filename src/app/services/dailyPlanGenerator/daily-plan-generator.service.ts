@@ -6,8 +6,9 @@ import {Assignment} from "../../models/assignment";
 import {Profile} from "../../models/profile";
 import {ProfileService} from "../../services/profile/profile.service";
 import {ExerciseService} from "../../services/exercise/exercise.service";
-
-
+import {Observable} from "rxjs/Observable";
+// import 'rxjs/add/operator/forkJoin';
+import 'rxjs/add/observable/forkJoin';
 
 
 @Injectable()
@@ -110,7 +111,7 @@ export class DailyPlanGeneratorService {
 			var chosenRating = new ExerciseRating();
 			for(var i=0; i<person.ratings.length; i++){
 				console.log(person.ratings[i].targetExerciseKey);
-				if(person.ratings[i].targetExerciseKey == chosenExercise["$key"]){
+				if(person.ratings[i].targetExerciseKey == chosenExerciseKey){
 					chosenRating = person.ratings[i];
 					console.log("SUCCESS");
 				}
@@ -134,6 +135,68 @@ export class DailyPlanGeneratorService {
 		}))
 	}
 
+	genAssignmentCB(type: string, cb){
+		var person = (new ProfileService(this.af)).getCurrentUser();
+
+		// Generate Random Exercise, with the given type
+		// TODO: Oh god it's ugly dont look
+		var gotType = '';
+		// console.log("making an assignment ",type)
+
+		// Get the target exercise out of the DB
+		var chosenExercise = new Exercise("null");
+		// var possibleExercises = [];
+		// console.log("entering DB Call")
+		(new ExerciseService(this.af)).getAllExercises((possibleExercises =>{
+			// console.log("inside the DB Call", possibleExercises);
+			var actuallyPossible = []
+			for(var i=0; i<possibleExercises.length; i++){
+				if(possibleExercises[i].type == type){
+					actuallyPossible.push(possibleExercises[i]);
+				}
+			}
+			// console.log("found list", actuallyPossible.length, possibleExercises.length)
+
+			var min = 0;
+			var max = actuallyPossible.length - 1;
+			var index = Math.floor(Math.random() * (max - min + 1)) + min;
+			// console.log("Here?");
+			var chosenExercise = actuallyPossible[index];
+			// console.log("Here2?", chosenExercise)
+			var chosenExerciseKey = chosenExercise["$key"];
+			// console.log("ChosenExercise: ",chosenExercise);
+			// console.log("key: ",chosenExerciseKey);
+			// console.log("attempting to find Rating")
+			var chosenRating = new ExerciseRating();
+			for(var i=0; i<person.ratings.length; i++){
+				// console.log(person.ratings[i].targetExerciseKey);
+				if(person.ratings[i].targetExerciseKey == chosenExerciseKey){
+					chosenRating = person.ratings[i];
+					// console.log("SUCCESS");
+				}
+			}
+
+
+			// Copy Json, modify based on user vars
+			// TODO: reasonable scaling
+			var assign = new Assignment(chosenExercise, 0);
+			assign.exercise = chosenExercise;
+			assign.time = chosenExercise.time;
+			assign.repetitions = chosenExercise.repetitions;
+			assign.sets = chosenExercise.sets;
+			assign.weight = chosenExercise.weight * person.muscle + chosenRating.intensityScaling;
+			assign.completed = false;
+	        assign.feedback = 0;
+
+
+			console.log(assign);
+			cb(assign);
+		}))
+	}
+
+
+
+
 	shuffle(array) {
 	  var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -153,31 +216,47 @@ export class DailyPlanGeneratorService {
 	  return array;
 	}
 
-	genWorkout(){
+	genWorkout(callb){
 		// Randomly choose a workout with that focus / Type
 		// TODO: Algorithmically determine pattern of main focus
-		var focuses = [];
-		return (new ExerciseService(this.af)).getAllTypes(((val) =>{
-			focuses = val;
+
+		(new ExerciseService(this.af)).getAllTypes(((val) =>{
+			var focuses = val;
 			var mainFocus = focuses[Math.floor(Math.random() * focuses.length)];
 
 			var plan = [];
-			for(var i =0; i<focuses.length; i++){
-				var foc = focuses[Math.floor(Math.random() * focuses.length)];
-				plan.push(this.genAssignment(foc));
-			}
-			for(var i =0; i<focuses.length; i++){
-				var foc = focuses[Math.floor(Math.random() * focuses.length)];
-				plan.push(this.genAssignment(mainFocus));
-			}
 
+			this.genWorkoutHelper(focuses.length, focuses, plan, (()=>{
+				this.genWorkoutHelper(3, [mainFocus], plan, (()=>{
+					console.log("BEFORE SHUFFLING: ", plan)
+					var shuffled = this.shuffle(plan);
+					console.log("SHUFFLED: ",shuffled);
+					callb(shuffled);
+
+				}));
+			}));
 			// TODO: Maybe Improve shuffling for cardio at beginning/end
-			var shuffled = this.shuffle(plan);
-			console.log(shuffled);
-
-			return shuffled;
+			
 		}));
+	}
+	wow(){
+		var stuff;
+		this.genWorkout(((val)=>{stuff = val; console.log("FINAL VALUES: ",val)}));
+	}
 
+	// Recursive function to deal with Synchronous Callbacks
+	genWorkoutHelper(count: number, focuses, plan, cb){
+		if(count > 0){
+			console.log("focuses",focuses)
+			var foc = focuses[Math.floor(Math.random() * focuses.length)];
+			this.genAssignmentCB(foc["$value"], ((val)=>{
+				plan.push(val);
+				this.genWorkoutHelper(count-1, focuses, plan, cb) //count-1
+			}));
+		}
+		else{
+			cb();
+		}
 	}
 
 	genWeekPlan(Person){

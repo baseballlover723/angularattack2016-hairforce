@@ -17,12 +17,12 @@
         <iframe width="100%" height="315" src="{{assignment.exercise.videoUrl}}" frameborder="0"
                 allowfullscreen></iframe>
         <div class="card-content">
-            <span>{{assignment.sets}} sets / {{assignment.repititions}} reps</span>
+            <span>{{assignment.sets}} sets / {{assignment.repetitions}} reps</span>
             <span class="right">{{assignment.weight}} lbs</span>
         </div>
         <div class="card-action">
             <i (click)="favoriteExercise()" class="fa fa-star favorite-exercise"></i>
-            <i (click)="completeSet()" class="fa fa-check right complete-set"></i>
+            <i (click)="completeSet()" [ngClass]="assignment.completed ? 'green-text' : ''" class="fa fa-check right complete-set"></i>
         </div>
     </div>
 </div>

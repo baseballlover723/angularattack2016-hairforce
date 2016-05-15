@@ -42,7 +42,7 @@ export class AccountComponent implements OnInit {
 
   testGenWorkout(){
     console.log("Generating a workout");
-    this.dailyPlanGeneratorService.genWorkout();
+    this.dailyPlanGeneratorService.wow();
   }
 
   testAddExercise() {

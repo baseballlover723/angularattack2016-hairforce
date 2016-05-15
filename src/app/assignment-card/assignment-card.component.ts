@@ -15,10 +15,11 @@ export class AssignmentCardComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
   completeSet() {
-    this.assignment.completed = true;
+    this.assignment.completed = !this.assignment.completed;
   }
 
   favoriteExercise() {

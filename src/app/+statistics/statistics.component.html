@@ -6,7 +6,7 @@
                     <span class="card-title">Post-workout Statistics</span>
                     <div class="card-action">
                         <div class="row">
-                            <div class="col s4 statistic-obj center-align">
+                            <div *ngIf="assignments" class="col s4 statistic-obj center-align">
                                 <h2>
                                     {{calculateComplete()}}%
                                 </h2>
@@ -15,7 +15,7 @@
                                 </h5>
                             </div>
 
-                            <div class="col s4 statistic-obj center-align">
+                            <div *ngIf="assignments" class="col s4 statistic-obj center-align">
                                 <h2>
                                     {{calculatePoundsLifted()}}
                                 </h2>
@@ -24,7 +24,7 @@
                                 </h5>
                             </div>
 
-                            <div class="col s4 statistic-obj center-align">
+                            <div *ngIf="assignments" class="col s4 statistic-obj center-align">
                                 <h2>
                                     {{calculateTimeDoingCardio()}}
                                 </h2>
@@ -70,6 +70,10 @@
                                 </tr>
                                 </tbody>
                             </table>
+                        </div>
+
+                        <div class="row">
+                            <button type="button" (click)="sendFeedback()" class="btn waves-effect waves-light">Submit feedback</button>
                         </div>
                     </div>
                 </div>

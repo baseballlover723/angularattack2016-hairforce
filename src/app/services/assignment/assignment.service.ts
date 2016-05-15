@@ -9,12 +9,12 @@ export class AssignmentService {
   }
 
   getAssignment(id: string, callback = (assignment) => {}) {
-    this.af.object("/assignments/" + id).subscribe((assignment) => {
+    let sub = this.af.object("/assignments/" + id).subscribe((assignment) => {
+      sub.unsubscribe();
       if (!assignment) {
         callback(false);
         return;
       }
-      console.log("getting assignment: " + id);
       assignment.$key = id;
       callback(assignment);
       return;
@@ -39,8 +39,8 @@ export class AssignmentService {
   }
 
   getAllAssignments(callback = (assignments) => {}) {
-    this.af.list("/assignments/").subscribe((assignments) => {
-      console.log("getting all assignments");
+    let sub = this.af.list("/assignments/").subscribe((assignments) => {
+      sub.unsubscribe();
       callback(assignments);
       return;
     });
@@ -59,10 +59,13 @@ export class AssignmentService {
 
   updateAssignment(assignment: Assignment, callback = (assignmentKey) => {}) {
     let key = assignment["$key"];
+    let exercisekey = assignment.exercise['$key'];
     delete assignment["$key"];
+    delete assignment.exercise['$key'];
     // console.log(assignment);
     const promise = this.af.object("/assignments/" + key).update(assignment);
     promise.then(_ => {
+      console.log("GOT", key);
       callback(key);
     }).catch(err => {
       console.log(err);

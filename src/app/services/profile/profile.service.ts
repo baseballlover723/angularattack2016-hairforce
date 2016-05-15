@@ -18,10 +18,11 @@ export class ProfileService {
     const currentAuth = this.ref.getAuth();
     if (!ProfileService.currentUser && currentAuth) {
       this.findProfile(currentAuth.provider + "Uid", currentAuth.uid, (profile) => {
+        console.log(profile);
         if (!profile || ProfileService.currentUser) {
           return;
         }
-        this.login(profile, (profile)=> {
+        this.login(profile, ()=> {
         });
       });
     }
@@ -42,8 +43,8 @@ export class ProfileService {
 
   getProfile(id: string, callback = (profile) => {
   }) {
-    this.af.database.object("/profiles/" + id).subscribe((profile) => {
-      console.log("getting profile: " + id);
+    let sub = this.af.database.object("/profiles/" + id).subscribe((profile) => {
+      sub.unsubscribe();
       (profile).$key = id;
       callback(profile);
       return;
@@ -54,8 +55,20 @@ export class ProfileService {
   }) {
     const promise = this.af.list("/profiles/").push(profile);
     promise.then(_ => {
-      profile["$key"] = promise.key();
-      callback(profile["$key"]);
+      profile.$key = promise.key();
+      callback(profile.$key);
+    }).catch(err => {
+      console.log(err);
+      callback(false);
+    });
+  }
+
+  updateProfile(profile: Profile, callback = (profileKey) => {}) {
+    let key = profile.$key;
+    delete profile.$key;
+    const promise = this.af.object("/profiles/" + key).update(profile);
+    promise.then(_ => {
+      callback(key);
     }).catch(err => {
       console.log(err);
       callback(false);
@@ -63,21 +76,22 @@ export class ProfileService {
   }
 
 
-  login(profile: Profile, callback = (profile)=> {}) {
+  login(profile: Profile, callback = ()=> {}) {
     ProfileService.currentUser = profile;
     console.log("logged in: " + profile.name);
     // Nathan added - Update all ratings just in case
     this.updateRatings();
-    callback(profile);
+    callback();
   }
 
   findProfile(provider: string, uid: string, callback = (profile) => {}) {
-    this.af.list("/profiles", {
+    let sub = this.af.list("/profiles", {
       query: {
         orderByChild: provider,
         equalTo: uid
       }
     }).subscribe((profile) => {
+      sub.unsubscribe();
       callback(profile[0]);
     });
   }
@@ -96,36 +110,29 @@ export class ProfileService {
       if (!error) {
         callback(authData);
       }
-
     }, settings);
-
-
   }
 
-  fbLogin(callback = (profile)=> {
-
-  }) {
+  fbLogin(callback = (profile)=> {}) {
     this.socialLogin("facebook", (authData) => {
       this.findProfile("facebookUid", authData.uid, (profile) => {
         if (!profile) {
           return;
         }
-        this.login(profile, (profile)=> {
+        this.login(profile, ()=> {
           callback(profile);
         });
       });
     });
   }
 
-  googleLogin(callback = (profile)=> {
-
-  }) {
+  googleLogin(callback = (profile)=> {}) {
     this.socialLogin("google", (authData) => {
       this.findProfile("googleUid", authData.uid, (profile) => {
         if (!profile) {
           return;
         }
-        this.login(profile, (profile) => {
+        this.login(profile, () => {
           callback(profile);
         });
       });
@@ -140,7 +147,7 @@ export class ProfileService {
         if (!profile) {
           return;
         }
-        this.login(profile, (profile) => {
+        this.login(profile, () => {
           callback(profile);
         });
       });
@@ -156,8 +163,12 @@ export class ProfileService {
       var providerStr = provider + "Uid";
       var updateData = {};
       updateData[providerStr] = authData.uid;
-      this.af.object("/profiles/" + ProfileService.currentUser["$key"]).update(updateData);
-      callback(authData);
+      this.af.object("/profiles/" + ProfileService.currentUser["$key"]).update(updateData).then(_ => {
+        callback(authData);
+      }).catch(err => {
+        console.log(err);
+        callback(false);
+      });
     });
   }
 
