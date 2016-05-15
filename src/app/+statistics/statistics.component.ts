@@ -5,6 +5,7 @@ import {Workout} from "../models/workout";
 import {WorkoutService} from "../services/workout/workout.service";
 import {RouteSegment, Router} from '@angular/router';
 import {AssignmentService} from "../services/assignment/assignment.service";
+import {ExerciseService} from "../services/exercise/exercise.service";
 
 @Component({
   moduleId: module.id,
@@ -12,7 +13,7 @@ import {AssignmentService} from "../services/assignment/assignment.service";
   templateUrl: 'statistics.component.html',
   styleUrls: ['statistics.component.css'],
   
-  providers: [WorkoutService, AssignmentService]
+  providers: [WorkoutService, AssignmentService, ExerciseService]
 })
 export class StatisticsComponent implements OnInit {
   
@@ -21,7 +22,7 @@ export class StatisticsComponent implements OnInit {
   private assignments: Assignment[];
   private workout: Workout;
   
-  constructor(private workoutService: WorkoutService, private assignmentService: AssignmentService, private router: Router) {}
+  constructor(private workoutService: WorkoutService, private assignmentService: AssignmentService, private router: Router, private exerciseService: ExerciseService) {}
 
   ngOnInit() {
   }
@@ -31,8 +32,17 @@ export class StatisticsComponent implements OnInit {
     this.workoutService.getWorkout(this.id,(workout) => {
       this.workout = workout;
       let strings = workout.assignments;
-      this.assignmentService.getAssignments(strings, (assignments: Assignment[]) => {
-        this.assignments = assignments;
+      console.log("strings", strings);
+      this.assignmentService.getAssignments(strings, (assignments) => {
+        this.assignments = [];
+        console.log("Assignments gotten", this.assignments);
+        for (let i = 0; i < assignments.length; i++) {
+          this.exerciseService.getExercise(assignments[i].exercise, (exercise) => {
+            var assignment = assignments[i];
+            assignment.exercise = exercise;
+            this.assignments.push(assignment);
+          });
+        }
       });
     });
 
@@ -56,11 +66,12 @@ export class StatisticsComponent implements OnInit {
   calculatePoundsLifted() {
   let totalWeight = 0;
 
-  for (let i = 0; i < this.assignments.length; i++) {
-    if(this.assignments[i].completed && this.assignments[i].exercise.type == 'strength') {
-      totalWeight += (this.assignments[i].weight * this.assignments[i].sets * this.assignments[i].repetitions);
+    for (let i = 0; i < this.assignments.length; i++) {
+      if(this.assignments[i].completed && this.assignments[i].exercise.type == 'strength') {
+        totalWeight += (this.assignments[i].weight * this.assignments[i].sets * this.assignments[i].repetitions);
+      }
     }
-  }
+    console.log("Pounds lifted", totalWeight);
 
   return totalWeight;
 }

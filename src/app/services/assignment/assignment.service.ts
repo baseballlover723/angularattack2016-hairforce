@@ -26,6 +26,7 @@ export class AssignmentService {
     for (var index in ids) {
       var id = ids[index];
       this.getAssignment(id, (assignment) => {
+        console.log("Ugabooga", assignment);
         if (assignment) {
           assignments.push(assignment);
         } else {
@@ -61,7 +62,7 @@ export class AssignmentService {
     let key = assignment["$key"];
     let exercisekey = assignment.exercise['$key'];
     delete assignment["$key"];
-    delete assignment.exercise['$key'];
+    delete assignment.exercise;
     // console.log(assignment);
     const promise = this.af.object("/assignments/" + key).update(assignment);
     promise.then(_ => {

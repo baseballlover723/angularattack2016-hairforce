@@ -5,15 +5,18 @@ nav {
   background-color: #2962FF;
   .nav-wrapper {
     ul {
-      a {
-        font-size: 24px;
+      li {
+        height: 64px;
+        a {
+          font-size: 24px;
 
-        .profile-pic-holder {
-          display: inline-block;
-        }
-        i {
-          padding-left: 16px;
-          margin-right: 16px;
+          .profile-pic-holder {
+            display: inline-block;
+          }
+          i {
+            padding-left: 16px;
+            margin-right: 16px;
+          }
         }
       }
     }
