@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {Workout} from "../models/workout";
 import {Assignment} from "../models/assignment";
-import {SingleExercise} from "../testdata/single-exercise";
 import {AssignmentCardComponent} from "../assignment-card";
+import {RouteSegment} from '@angular/router';
+import {WorkoutService} from "../services/workout/workout.service";
 
 @Component({
   moduleId: module.id,
@@ -11,17 +12,18 @@ import {AssignmentCardComponent} from "../assignment-card";
   styleUrls: ['session-list.component.css'],
 
   directives: [AssignmentCardComponent],
-  providers: [SingleExercise]
+  providers: [WorkoutService]
 })
 export class SessionListComponent implements OnInit {
+  private id: String;
 
   @Input() workout: Workout;
-  
+
   // Build query to place all assignments here
   assignments: Assignment[];
-  
 
-  constructor(private singleAssignmentService: SingleExercise) {
+
+  constructor(private ws: WorkoutService) {
     this.assignments = [];
   }
 
@@ -30,5 +32,13 @@ export class SessionListComponent implements OnInit {
     // this.assignments.push(this.singleAssignmentService.getAssignment());
     // this.assignments.push(this.singleAssignmentService.getAssignment());
     // this.assignments.push(this.singleAssignmentService.getAssignment());
+  }
+
+  routerOnActivate(curr:RouteSegment) {
+      this.id = curr.getParam('id');
+      this.ws.getWorkout('439jfajoejfw',(workout) => {
+        this.workout = workout;
+      });
+
   }
 }
