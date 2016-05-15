@@ -40,6 +40,10 @@ export class AccountComponent implements OnInit {
     this.dailyPlanGeneratorService.genAssignment('strength');
   }
 
+  testProfileUpdateRatings(){
+    this.profileService.updateRatings();
+  }
+
   testAddExercise() {
     var newExercise: Exercise = new Exercise("nathans execise");
     this.exerciseService.addNewExercise(newExercise, (exercise) => {
