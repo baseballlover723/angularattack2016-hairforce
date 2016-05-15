@@ -63,6 +63,9 @@ export class DailyPlanGeneratorService {
 			assign.repetitions = chosenExercise.repetitions;
 			assign.sets = chosenExercise.sets;
 			assign.weight = chosenExercise.weight * person.muscle + chosenRating.intensityScaling;
+			assign.completed = false;
+	        assign.feedback = 0;
+
 			return assign;
 		}))
 		// console.log(assign);
@@ -92,7 +95,7 @@ export class DailyPlanGeneratorService {
 					actuallyPossible.push(possibleExercises[i]);
 				}
 			}
-			console.log("found list")
+			console.log("found list", actuallyPossible.length, possibleExercises.length)
 
 			var min = 0;
 			var max = actuallyPossible.length - 1;
@@ -122,6 +125,9 @@ export class DailyPlanGeneratorService {
 			assign.repetitions = chosenExercise.repetitions;
 			assign.sets = chosenExercise.sets;
 			assign.weight = chosenExercise.weight * person.muscle + chosenRating.intensityScaling;
+			assign.completed = false;
+	        assign.feedback = 0;
+
 
 			console.log(assign);
 			return assign;
@@ -147,26 +153,31 @@ export class DailyPlanGeneratorService {
 	  return array;
 	}
 
-	genDayPlan(Person){
+	genWorkout(){
 		// Randomly choose a workout with that focus / Type
 		// TODO: Algorithmically determine pattern of main focus
 		var focuses = [];
-		(new ExerciseService(this.af)).getAllTypes(((val) =>{focuses = val}));
-		var mainFocus = focuses[Math.floor(Math.random() * focuses.length)];
+		return (new ExerciseService(this.af)).getAllTypes(((val) =>{
+			focuses = val;
+			var mainFocus = focuses[Math.floor(Math.random() * focuses.length)];
 
-		var plan = [];
-		for(var i =0; i<focuses.length; i++){
-			var foc = focuses[Math.floor(Math.random() * focuses.length)];
-			plan.push(this.genAssignment(foc));
-		}
-		for(var i =0; i<focuses.length; i++){
-			var foc = focuses[Math.floor(Math.random() * focuses.length)];
-			plan.push(this.genAssignment(mainFocus));
-		}
+			var plan = [];
+			for(var i =0; i<focuses.length; i++){
+				var foc = focuses[Math.floor(Math.random() * focuses.length)];
+				plan.push(this.genAssignment(foc));
+			}
+			for(var i =0; i<focuses.length; i++){
+				var foc = focuses[Math.floor(Math.random() * focuses.length)];
+				plan.push(this.genAssignment(mainFocus));
+			}
 
-		// TODO: Maybe Improve shuffling for cardio at beginning/end
-		var shuffled = this.shuffle(plan);
-		return shuffled;
+			// TODO: Maybe Improve shuffling for cardio at beginning/end
+			var shuffled = this.shuffle(plan);
+			console.log(shuffled);
+
+			return shuffled;
+		}));
+
 	}
 
 	genWeekPlan(Person){

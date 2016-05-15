@@ -209,8 +209,6 @@ export class ProfileService {
       this.af.object("/profiles/" + ProfileService.currentUser["$key"]).update(updateData);
     }));
 
-    
-
   }
 
   // getRating(exercise: Exercise){

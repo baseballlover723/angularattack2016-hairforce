@@ -9,6 +9,8 @@ export class Assignment {
     repetitions: number;
     sets: number;
     weight: number;
+    completed: boolean;
+    feedback: number;
 
   constructor(exercise: Exercise, time: number) {
     this.exercise = exercise["$key"];
