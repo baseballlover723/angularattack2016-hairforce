@@ -1,5 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {WeekPlanCardComponent} from "../week-plan-card";
+import {ActivityHistoryComponent} from "../activity-history"
 import {ExerciseService} from "../services/exercise/exercise.service";
 import {Exercise} from "../models/exercise";
 import {AssignmentService} from "../services/assignment/assignment.service";
@@ -14,7 +15,7 @@ import {WorkoutService} from "../services/workout/workout.service";
   templateUrl: "dashboard.component.html",
   styleUrls: ["dashboard.component.css"],
 
-  directives: [WeekPlanCardComponent],
+  directives: [WeekPlanCardComponent, ActivityHistoryComponent],
   providers: [ExerciseService, AssignmentService, WorkoutService]
 })
 export class DashboardComponent implements OnInit {

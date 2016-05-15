@@ -1,0 +1,4 @@
+<div id="activity-history" class="col s3 pull-s1 card  red lighten-3">
+  <div id="ah-title">Recent Exercises</div>
+  <activity (click)="startExercise(e)" *ngFor="let e of exercises" [exercise]="e"></activity>
+</div>

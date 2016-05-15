@@ -44,7 +44,9 @@ const barrels: string[] = [
   'app/+statistics',
   'app/assignment-card',
   'app/spinner',
-  'app/exercise-tile'
+  'app/exercise-tile',
+  'app/activity-history',
+  'app/activity'
 ];
 
 const cliSystemConfigPackages = {
