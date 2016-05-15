@@ -88,4 +88,26 @@ export class AccountComponent implements OnInit {
       });
     });
   }
+
+  testAssignmentWithObject() {
+    this.assignmentService.getAssignmentWithObject("asoaesjfoacnlk", (assignment) => {
+
+      console.log(assignment);
+      console.log(assignment.exercise);
+    });
+  }
+
+  testAssignmentsWithObjects() {
+    console.log("hel");
+    this.assignmentService.getAssignmentsWithObjects(["asoaesjfoacnlk"], (assignments) => {
+
+      console.log(assignments);
+    });
+  }
+  testAllAssignmentsWithObjects() {
+    this.assignmentService.getAllAssignmentsWithObjects((assignments) => {
+
+      console.log(assignments);
+    });
+  }
 }
