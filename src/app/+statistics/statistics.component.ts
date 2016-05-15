@@ -86,7 +86,7 @@ export class StatisticsComponent implements OnInit {
     for (let j = 0; j < this.assignments.length; j++) {
       this.assignmentService.updateAssignment(this.assignments[j]);
     }
-    this.router.navigate(['/']);
+    this.router.navigate(['/dashboard']);
   }
 
   
