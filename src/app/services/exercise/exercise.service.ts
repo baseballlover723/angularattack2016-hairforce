@@ -10,7 +10,8 @@ export class ExerciseService {
 
   getExercise(id: string, callback = (exercise) => {
   }) {
-    this.af.object("/exercises/" + id).subscribe((exercise) => {
+    let sub = this.af.object("/exercises/" + id).subscribe((exercise) => {
+      sub.unsubscribe();
       if (!exercise) {
         callback(false);
         return;
@@ -24,8 +25,9 @@ export class ExerciseService {
 
   getAllTypes(callback = (types) => {
   }) {
-    this.af.list("/types/").subscribe((types) => {
-      console.log("getting all exercises");
+    let sub = this.af.list("/types/").subscribe((types) => {
+      // console.log("getting all Types");
+      sub.unsubscribe();
       callback(types);
       return;
     });
@@ -51,10 +53,12 @@ export class ExerciseService {
 
   getAllExercises(callback = (exercises) => {
   }) {
-    this.af.list("/exercises/").subscribe((exercises) => {
-      console.log("getting all exercises");
+
+    let sub = this.af.list("/exercises/").subscribe((exercises) => {
+      // console.log("getting all exercises", exercises);
+      sub.unsubscribe();
       callback(exercises);
-      return;
+      // return;
     });
   }
 
