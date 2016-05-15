@@ -1,52 +1,36 @@
 import{ Component, OnInit } from '@angular/core';
 import {ProfileService} from "../services/profile/profile.service";
 import { Router } from '@angular/router';
-import {Profile} from "../models/profile";
+import {SigninModalComponent} from "../signin-modal/signin-modal.component";
+import {MaterializeDirective} from "angular2-materialize";
+
 
 @Component({
   moduleId: module.id,
   selector: 'app-home',
   templateUrl: 'home.component.html',
   styleUrls: ['home.component.css'],
+
+  directives: [SigninModalComponent, MaterializeDirective],
   providers: [ProfileService]
 
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router: Router, private profileService: ProfileService) {}
+  constructor(private profileService: ProfileService, private router: Router) {}
 
   ngOnInit() {
   }
 
-  // Google authentication
-  onGoogleLogin() {
-    this.profileService.googleLogin((profile)=> {
-      this.routeUser();
-    });
+  onFacebookSignup() {
+
   }
 
-  // Github authentication
-  onGithubLogin() {
-    this.profileService.githubLogin((profile)=> {
-      this.routeUser();
+  onGithubSignup() {
 
-    });
   }
 
-  // Facebook authentication
-  onFacebookLogin() {
-    this.profileService.fbLogin((profile)=> {
-      this.routeUser();
-    });
-  }
+  onGoogleSignup() {
 
-  routeUser() {
-    let profile = this.profileService.getCurrentUser();
-    // console.log("MINE", this.profileService.getCurrentUser());
-    if (profile.experience !== null) {
-      this.router.navigate(['/dashboard']);
-    } else {
-      this.router.navigate(['/registration/' + profile['$key']]);
-    }
   }
 }

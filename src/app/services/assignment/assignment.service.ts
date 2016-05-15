@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AngularFire} from "angularfire2";
+import {Assignment} from "../../models/assignment";
 
 @Injectable()
 export class AssignmentService {
@@ -42,6 +43,17 @@ export class AssignmentService {
       console.log("getting all assignments");
       callback(assignments);
       return;
+    });
+  }
+
+  addNewAssignment(assignment: Assignment, callback = (assignmentKey) => {}) {
+    const promise = this.af.list("/assignments/").push(assignment);
+    promise.then(_ => {
+      assignment["$key"] = promise.key();
+      callback(assignment["$key"]);
+    }).catch(err => {
+      console.log(err);
+      callback(false);
     });
   }
 
