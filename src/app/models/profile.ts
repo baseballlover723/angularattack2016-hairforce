@@ -5,6 +5,7 @@ import {ExerciseRating} from "./exerciserating";
  * A user's profile.
  */
 export class Profile {
+  $key: string;
   name: string;
   email: string;
   profilePic: string;
