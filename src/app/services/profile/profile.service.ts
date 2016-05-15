@@ -5,51 +5,121 @@ import {Profile} from "../../models/profile";
 
 @Injectable()
 export class ProfileService {
-  currentUser: Profile;
-  loggedIn: boolean;
+  public static currentUser: Profile;
 
   constructor(private af: AngularFire) {
-    this.loggedIn = false;
-    this.getCurrentUser();
   }
 
-  getCurrentUser(callback = function (profile) {
-  }) {
-    if (this.loggedIn) {
-      callback(this.currentUser);
-      return;
-    }
-    this.getProfile("alsjflskejfaasldfj", (profile) => {
-        if (this.isLoggedIn()) {
-          callback(this.currentUser);
-          return;
-        }
-        this.currentUser = profile;
-        this.loggedIn = true;
-        console.log("logged in");
-        callback(profile);
-        return;
-      }
-    );
+  getCurrentUser() {
+    return ProfileService.currentUser;
   }
 
   logOut() {
-    console.log("logged out");
-    this.currentUser = null;
-    this.loggedIn = false;
+    console.log("logged out: " + ProfileService.currentUser.name);
+    ProfileService.currentUser = null;
   }
 
-  isLoggedIn() {
-    return this.loggedIn;
-  }
-
-  getProfile(id: string, callback = (profile) => {}) {
-    this.af.database.object("/profiles/" + id).subscribe(profile => {
+  getProfile(id: string, callback = (profile) => {
+  }) {
+    this.af.database.object("/profiles/" + id).subscribe((profile) => {
       console.log("getting profile: " + id);
-      profile.$key = id;
+      (profile).$key = id;
       callback(profile);
       return;
     });
   }
 
+  login(profile: Profile) {
+    ProfileService.currentUser = profile;
+    console.log("logged in: " + profile.name);
+  }
+
+  findProfile(provider: string, uid: string, callback = (profile) => {
+  }) {
+    this.af.list("/profiles", {
+      query: {
+        orderByChild: provider,
+        equalTo: uid
+      }
+    }).subscribe((profile) => {
+      callback(profile[0]);
+    });
+  }
+
+  socialLogin(provider: string, callback = (authData) => {}) {
+    var ref = new Firebase("https://hairforceattack.firebaseio.com/");
+    var settings = {
+      remember: "sessionOnly",
+      scope: "email,user_likes"
+    };
+    if (provider == "google") {
+      settings.scope = "";
+    }
+    ref.authWithOAuthPopup(provider, (error, authData) => {
+      console.log(provider + " auth data. v");
+      console.log(authData);
+      if (!error) {
+        callback(authData);
+      }
+    }, settings);
+  }
+
+  fbLogin() {
+    this.socialLogin("facebook", (authData) => {
+      this.findProfile("facebookUid", authData.uid, (profile) => {
+        if (!profile) {
+          return;
+        }
+        this.login(profile);
+      });
+    });
+  }
+
+  googleLogin() {
+    this.socialLogin("google", (authData) => {
+      this.findProfile("googleUid", authData.uid, (profile) => {
+        if (!profile) {
+          return;
+        }
+        this.login(profile);
+      });
+    });
+  }
+
+  githubLogin() {
+    this.socialLogin("github", (authData) => {
+      this.findProfile("githubUid", authData.uid, (profile) => {
+        if (!profile) {
+          return;
+        }
+        this.login(profile);
+      });
+    });
+  }
+
+  link(provider: string, callback = (authData) => {}) {
+    if (!ProfileService.currentUser) {
+      callback(false);
+      return;
+    }
+    this.socialLogin(provider, (authData) => {
+      var providerStr = provider + "Uid";
+      var updateData = {};
+      updateData[providerStr] = authData.uid;
+      this.af.object("/profiles/" + ProfileService.currentUser["$key"]).update(updateData);
+      callback(authData);
+    });
+  }
+
+  linkFacebook() {
+    this.link("facebook");
+  }
+
+  linkGoogle() {
+    this.link("google");
+  }
+
+  linkGithub() {
+    this.link("github");
+  }
 }
