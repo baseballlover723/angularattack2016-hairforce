@@ -22,6 +22,15 @@ export class ExerciseService {
     });
   }
 
+  getAllTypes(callback = (types) => {
+  }) {
+    this.af.list("/types/").subscribe((types) => {
+      console.log("getting all exercises");
+      callback(types);
+      return;
+    });
+  }
+
   getExercises(ids: string[], callback = (exercises) => {
   }) {
     var exercises = [];

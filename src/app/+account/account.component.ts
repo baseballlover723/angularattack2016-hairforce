@@ -37,7 +37,7 @@ export class AccountComponent implements OnInit {
 
 
   testGenFunction(){
-    this.dailyPlanGeneratorService.genAssignment('Legs')
+    this.dailyPlanGeneratorService.genAssignment('strength');
   }
 
   testAddExercise() {
