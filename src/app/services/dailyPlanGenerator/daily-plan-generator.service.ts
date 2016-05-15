@@ -55,13 +55,13 @@ export class DailyPlanGeneratorService {
 		var chosenExerciseKey = chosenRating.targetExerciseKey;
 
 		// Get the target exercise out of the DB
-		var chosenExercise = new Exercise();
+		var chosenExercise = new Exercise("null");
 		(new ExerciseService(this.af)).getExercise(chosenExerciseKey, ((val) =>{chosenExercise = val}))
 		console.log("ChosenExercise: ",chosenExercise);
 		
 		// Copy Json, modify based on user vars
 		// TODO: reasonable scaling
-		var assign = new Assignment();
+		var assign = new Assignment(chosenExercise, 0);
 		assign.exercise = chosenExercise;
 		assign.time = chosenExercise.time;
 		assign.repetitions = chosenExercise.repetitions;

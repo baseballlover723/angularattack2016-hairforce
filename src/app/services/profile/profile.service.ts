@@ -154,11 +154,11 @@ export class ProfileService {
     this.link("github");
   }
 
-  getRating(exercise: Exercise){
-    for(var i; i < this.getCurrentUser().ratings.length; i++){
-      if(this.getCurrentUser().ratings[i].targetExercise == exercise){
-        return this.getCurrentUser().ratings[i];
-      }
-    }
-  }
+  // getRating(exercise: Exercise){
+  //   for(var i; i < this.getCurrentUser().ratings.length; i++){
+  //     if(this.getCurrentUser().ratings[i].targetExerciseKey == exercise){
+  //       return this.getCurrentUser().ratings[i];
+  //     }
+  //   }
+  // }
 }
