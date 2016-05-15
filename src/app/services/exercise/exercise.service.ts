@@ -15,9 +15,18 @@ export class ExerciseService {
         callback(false);
         return;
       }
-      console.log("getting exercise: " + id);
+      // console.log("getting exercise: " + id);
       exercise.$key = id;
       callback(exercise);
+      return;
+    });
+  }
+
+  getAllTypes(callback = (types) => {
+  }) {
+    this.af.list("/types/").subscribe((types) => {
+      console.log("getting all exercises");
+      callback(types);
       return;
     });
   }

@@ -2,6 +2,11 @@ import {Injectable} from "@angular/core";
 import {AngularFire} from "angularfire2";
 import {Observable} from "rxjs/Observable";
 import {Profile} from "../../models/profile";
+import {Exercise} from "../../models/exercise";
+import {ExerciseRating} from "../../models/exerciserating";
+import {ExerciseService} from "../../services/exercise/exercise.service";
+
+
 
 @Injectable()
 export class ProfileService {
@@ -47,6 +52,8 @@ export class ProfileService {
   login(profile: Profile, callback = (profile)=> {}) {
     ProfileService.currentUser = profile;
     console.log("logged in: " + profile.name);
+    // Nathan added - Update all ratings just in case
+    this.updateRatings();
     callback(profile);
   }
 
@@ -76,7 +83,10 @@ export class ProfileService {
       if (!error) {
         callback(authData);
       }
+
     }, settings);
+
+
   }
 
   fbLogin(callback = (profile)=> {
@@ -149,4 +159,65 @@ export class ProfileService {
   linkGithub() {
     this.link("github");
   }
+
+  updateRatings(){
+    var availExercises = [];
+    var person = this.getCurrentUser();
+
+    (new ExerciseService(this.af)).getAllExercises(((possibleExercises) =>{
+      availExercises = possibleExercises;
+
+        // Get existing keys from current user
+      var existingKeys = [];
+      if(person.ratings){
+        for(var i=0; i<person.ratings.length; i++){
+          existingKeys.push(person.ratings[i].targetExerciseKey);
+        }
+      }
+
+      // Find any missing Keys, and add to todo
+      var todo = [];
+      for(var i=0; i<availExercises.length; i++){
+        if(existingKeys.indexOf(availExercises[i]["$key"]) < 0){
+          todo.push(availExercises[i]["$key"]);
+        }
+      }
+      // console.log("existingKeys",existingKeys);
+
+      // Generate Default ratings for each missing entry
+      var updateData = {};
+      if(person.ratings){
+        updateData["ratings"] = person.ratings;
+      } else { 
+        updateData["ratings"] = [];
+      }
+      // console.log("todo",todo);
+      // Run through Todolist
+      for(var i=0; i<todo.length; i++){
+        var tempRating = new ExerciseRating();
+        tempRating.targetExerciseKey = todo[i];
+        tempRating.intensityScaling = 1;
+        tempRating.repetitionsScaling = 1;
+        tempRating.setsScaling = 1;
+        tempRating.timeScaling = 1;
+        tempRating.weightScaling = 1;
+
+        updateData["ratings"].push(tempRating);
+      }
+
+      // Finally, Commit up Ratings
+      this.af.object("/profiles/" + ProfileService.currentUser["$key"]).update(updateData);
+    }));
+
+    
+
+  }
+
+  // getRating(exercise: Exercise){
+  //   for(var i; i < this.getCurrentUser().ratings.length; i++){
+  //     if(this.getCurrentUser().ratings[i].targetExerciseKey == exercise){
+  //       return this.getCurrentUser().ratings[i];
+  //     }
+  //   }
+  // }
 }

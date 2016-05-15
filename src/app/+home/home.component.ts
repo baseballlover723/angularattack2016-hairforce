@@ -37,16 +37,46 @@ export class HomeComponent implements OnInit {
         profile = new Profile(name, email, profilePic, sex);
         profile.facebookUid = authData.uid;
         this.profileService.addNewProfile(profile);
-        console.log(profile);
+        this.router.navigate(['/registration']);
       });
     });
   }
 
   onGithubSignup() {
+    this.profileService.socialLogin("github", (authData) => {
+      this.profileService.findProfile("githubUid", authData.uid, (profile) => {
+        if (profile) {
+          this.profileService.login(profile);
+          return;
+        }
+        let name: string = authData.github.displayName;
+        let email: string = authData.github.email;
+        let profilePic: string = authData.github.profileImageURL;
+        let sex: boolean = true;
+        profile = new Profile(name, email, profilePic, sex);
+        profile.githubUid = authData.uid;
+        this.profileService.addNewProfile(profile);
+      });
+    });
 
   }
 
   onGoogleSignup() {
+    this.profileService.socialLogin("google", (authData) => {
+      this.profileService.findProfile("googleUid", authData.uid, (profile) => {
+        if (profile) {
+          this.profileService.login(profile);
+          return;
+        }
+        let name: string = authData.google.displayName;
+        let email: string = "";
+        let profilePic: string = authData.google.profileImageURL;
+        let sex: boolean = true;
+        profile = new Profile(name, email, profilePic, sex);
+        profile.googleUid = authData.uid;
+        this.profileService.addNewProfile(profile);
+      });
+    });
 
   }
 }

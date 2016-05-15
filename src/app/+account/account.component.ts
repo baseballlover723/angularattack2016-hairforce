@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ProfileService} from "../services/profile/profile.service";
+import {DailyPlanGeneratorService} from "../services/dailyPlanGenerator/daily-plan-generator.service";
 import {AssignmentService} from "../services/assignment/assignment.service";
 import {ExerciseService} from "../services/exercise/exercise.service";
 import {Exercise} from "../models/exercise";
@@ -11,12 +12,13 @@ import {Assignment} from "../models/assignment";
   templateUrl: 'account.component.html',
   styleUrls: ['account.component.css'],
 
-  providers: [ProfileService, ExerciseService, AssignmentService]
+  providers: [ProfileService, ExerciseService, AssignmentService, DailyPlanGeneratorService]
 })
 export class AccountComponent implements OnInit {
 
   constructor(private profileService: ProfileService, private exerciseService: ExerciseService,
-              private assignmentService: AssignmentService) {}
+              private assignmentService: AssignmentService, private dailyPlanGeneratorService: DailyPlanGeneratorService) {}
+
 
   ngOnInit() {
   }
@@ -31,6 +33,15 @@ export class AccountComponent implements OnInit {
 
   linkGithub() {
     this.profileService.linkGithub();
+  }
+
+
+  testGenFunction(){
+    this.dailyPlanGeneratorService.genAssignment('strength');
+  }
+
+  testProfileUpdateRatings(){
+    this.profileService.updateRatings();
   }
 
   testAddExercise() {

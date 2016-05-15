@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MaterializeDirective} from 'angular2-materialize';
 import {NavbarComponent} from './navbar';
 import {Routes, ROUTER_PROVIDERS, ROUTER_DIRECTIVES} from '@angular/router';
@@ -32,11 +32,17 @@ import {AccountComponent} from "./+account/account.component";
     {path: '/session/:id', component: SessionListComponent},
     {path: '/statistics', component: StatisticsComponent},
     {path: '/exercises/:id', component: ExerciseComponent},
-    {path: '/registration/:id', component: UserInfoFormComponent},
+    {path: '/registration', component: UserInfoFormComponent},
     {path: '/account', component: AccountComponent}
-
 ])
 
-export class AngularAttackAppComponent {
+
+export class AngularAttackAppComponent implements OnInit{
+
+    constructor() {}
+
+    ngOnInit() {
+
+    }
     title = "angular-attack works!";
 }

@@ -1,13 +1,20 @@
 .daily-plan-card {
-	width: 80%;
-
-	.card .card-action a:not(.btn):not(.btn-large):not(.btn-floating){
-		margin: 0;
-	}
+	color: white;
+	background-color: #448AFF;
 
 	.card-title {
-		font-size: 3vw;
+		line-height: 0;
 	}
+
+	.card {
+		background-color: #448AFF;
+
+		.card-action {
+			border-top: 1px solid rgba(255, 255, 255, 0.4);
+		}
+	}
+
+
 
 	.material-icons {
 		margin-top: 2px;
@@ -28,11 +35,11 @@
 	}
 
 	.fa-ellipsis-v {
+		color: white;
 		font-size: 24px;
 	}
 
 	#iconWrapper {
-		width: 100px;
 		float: right;
 		display: inline-block;
 		height: 24px;
@@ -43,10 +50,12 @@
 	}
 
 	.icon {
+		padding-left: 16px;
+		padding-right: 16px;
 		display: inline-block;
-		width: 30%;
-		height: 100%;
-		color: white;
-		opacity: 0.6;
+		//width: 30%;
+		//height: 100%;
+		//color: white;
+		//opacity: 0.6;
 	}
 }

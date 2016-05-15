@@ -6,7 +6,7 @@ import {Exercise} from "./exercise";
 export class Assignment {
     exercise: Exercise;
     time: number;
-    repititions: number;
+    repetitions: number;
     sets: number;
     weight: number;
 
@@ -15,3 +15,4 @@ export class Assignment {
     this.time = time;
   }
 }
+
