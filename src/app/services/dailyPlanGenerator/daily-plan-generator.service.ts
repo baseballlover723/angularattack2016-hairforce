@@ -4,6 +4,10 @@ import {Exercise} from "../../models/exercise";
 import {ExerciseRating} from "../../models/exerciserating";
 import {Assignment} from "../../models/assignment";
 import {Profile} from "../../models/profile";
+import {ProfileService} from "../../services/profile/profile.service";
+import {ExerciseService} from "../../services/exercise/exercise.service";
+
+
 
 
 @Injectable()
@@ -40,23 +44,32 @@ export class DailyPlanGeneratorService {
 	// }
 
 	// TODO: Refine numbers for scaling purposes
-	genAssignment(person: Profile, type: string){
-		// Select random one
-		// From Exercises
-		// Where Type = type
-		Math.floor(Math.random() * (max - min + 1)) + min;
-		chosenExercise = ex;
-		chosenRating = person.getRating(chosenExercise);
-		// Copy Json, modify based on user vars
-		var assign: Assignment();
-		assign.exercise = chosenExercise
-		assign.time = chosenExercise.time
-		assign.repetitions = chosenExercise.repetitions * 
-		assign.sets = chosenExercise.sets;
-		assign.weight = chosenExercise.weight * person.muscle;
+	genAssignment(type: string){
+		var person = (new ProfileService(this.af)).getCurrentUser();
 
+		// Generate Random index in the person's ratings
+		var min = 0;
+		var max = person.ratings.length - 1;
+		var index = Math.floor(Math.random() * (max - min + 1)) + min;
+		var chosenRating = person.ratings[index];
+		var chosenExerciseKey = chosenRating.targetExerciseKey;
+
+		// Get the target exercise out of the DB
+		var chosenExercise = new Exercise();
+		(new ExerciseService(this.af)).getExercise(chosenExerciseKey, ((val) =>{chosenExercise = val}))
+		console.log("ChosenExercise: ",chosenExercise);
+		
+		// Copy Json, modify based on user vars
+		// TODO: reasonable scaling
+		var assign = new Assignment();
+		assign.exercise = chosenExercise;
+		assign.time = chosenExercise.time;
+		assign.repetitions = chosenExercise.repetitions;
+		assign.sets = chosenExercise.sets;
+		assign.weight = chosenExercise.weight * person.muscle + chosenRating.intensityScaling;
+
+		// console.log(assign);
 		return assign;
-		// return 1;
 	}
 
 	// function genDayPlan(Person){

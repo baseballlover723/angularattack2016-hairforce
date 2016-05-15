@@ -5,7 +5,7 @@ import {Exercise} from "./exercise";
  */
 
 export class ExerciseRating {
-	targetExercise: Exercise;
+	targetExerciseKey: string;
 	intensityScaling: number;
     repetitionsScaling: number;
     setsScaling: number;

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ProfileService} from "../services/profile/profile.service";
+import {DailyPlanGeneratorService} from "../services/dailyPlanGenerator/daily-plan-generator.service";
+
 
 @Component({
   moduleId: module.id,
@@ -7,11 +9,11 @@ import {ProfileService} from "../services/profile/profile.service";
   templateUrl: 'account.component.html',
   styleUrls: ['account.component.css'],
 
-  providers: [ProfileService]
+  providers: [ProfileService, DailyPlanGeneratorService]
 })
 export class AccountComponent implements OnInit {
 
-  constructor(private profileService: ProfileService) {}
+  constructor(private profileService: ProfileService, private dailyPlanGeneratorService: DailyPlanGeneratorService) {}
 
   ngOnInit() {
   }
@@ -26,6 +28,10 @@ export class AccountComponent implements OnInit {
 
   linkGithub() {
     this.profileService.linkGithub();
+  }
+
+  testGenFunction(){
+    this.dailyPlanGeneratorService.genAssignment('Legs')
   }
 
 }

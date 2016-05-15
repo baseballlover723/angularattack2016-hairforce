@@ -13,7 +13,7 @@ export class ExerciseService {
         callback(false);
         return;
       }
-      console.log("getting exercise: " + id);
+      // console.log("getting exercise: " + id);
       exercise.$key = id;
       callback(exercise);
       return;

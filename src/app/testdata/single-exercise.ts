@@ -22,7 +22,7 @@ export class SingleExercise {
         
         assignment.exercise = exercise;
         assignment.time = null;
-        assignment.repititions = 8;
+        assignment.repetitions = 8;
         assignment.sets = 3;
         assignment.weight = 40;
         
