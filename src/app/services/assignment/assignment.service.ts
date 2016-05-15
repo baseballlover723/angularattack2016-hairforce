@@ -57,4 +57,18 @@ export class AssignmentService {
     });
   }
 
+  updateAssignment(assignment: Assignment, callback = (assignmentKey) => {}) {
+    let key = assignment["$key"];
+    delete assignment["$key"];
+    // console.log(assignment);
+    const promise = this.af.object("/assignments/" + key).update(assignment);
+    promise.then(_ => {
+      callback(key);
+    }).catch(err => {
+      console.log(err);
+      callback(false);
+    });
+  }
+
+
 }
