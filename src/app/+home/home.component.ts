@@ -13,4 +13,20 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
+  // Google authentication
+  onGoogleLogin() {
+
+  }
+
+  // Github authentication
+  onGithubLogin() {
+
+  }
+
+  // Facebook authentication
+  onFacebookLogin() {
+
+  }
+
+
 }

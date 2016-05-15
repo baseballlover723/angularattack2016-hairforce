@@ -27,11 +27,22 @@ export class DashboardComponent implements OnInit {
   workout: Workout;
   workouts: Workout[];
 
+  // Read data off of the profile to see if the user has signed up
+  hasSetupAccount: boolean;
+
   constructor(private exerciseService: ExerciseService, private assignmentService: AssignmentService,
               private workoutService: WorkoutService) {
+    
+    // Set to false initially for testing purposes
+    this.hasSetupAccount = false;
+    
+    if(this.hasSetupAccount) {
+      $('#').openModal();
+    }
   }
 
   ngOnInit() {
+
   }
 
   testExercise() {
