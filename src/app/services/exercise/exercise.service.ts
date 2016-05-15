@@ -9,6 +9,10 @@ export class ExerciseService {
 
   getExercise(id: string, callback = (exercise) => {}) {
     this.af.object("/exercises/" + id).subscribe((exercise) => {
+      if (!exercise) {
+        callback(false);
+        return;
+      }
       console.log("getting exercise: " + id);
       exercise.$key = id;
       callback(exercise);
@@ -18,10 +22,14 @@ export class ExerciseService {
 
   getExercises(ids: string[], callback = (exercises) => {}) {
     var exercises = [];
-    for (var id in ids) {
-      id = ids[id];
+    for (var index in ids) {
+      var id = ids[index];
       this.getExercise(id, (exercise) => {
-        exercises.push(exercise);
+        if (exercise) {
+          exercises.push(exercise);
+        } else {
+          ids.splice(parseInt(index), 1);
+        }
         if (ids.length == exercises.length) {
           callback(exercises);
         }
