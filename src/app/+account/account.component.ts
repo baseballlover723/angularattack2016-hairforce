@@ -5,6 +5,7 @@ import {AssignmentService} from "../services/assignment/assignment.service";
 import {ExerciseService} from "../services/exercise/exercise.service";
 import {Exercise} from "../models/exercise";
 import {Assignment} from "../models/assignment";
+import {WorkoutService} from "../services/workout/workout.service";
 
 @Component({
   moduleId: module.id,
@@ -12,12 +13,13 @@ import {Assignment} from "../models/assignment";
   templateUrl: 'account.component.html',
   styleUrls: ['account.component.css'],
 
-  providers: [ProfileService, ExerciseService, AssignmentService, DailyPlanGeneratorService]
+  providers: [ProfileService, ExerciseService, AssignmentService, DailyPlanGeneratorService, WorkoutService]
 })
 export class AccountComponent implements OnInit {
 
   constructor(private profileService: ProfileService, private exerciseService: ExerciseService,
-              private assignmentService: AssignmentService, private dailyPlanGeneratorService: DailyPlanGeneratorService) {}
+              private assignmentService: AssignmentService, private dailyPlanGeneratorService: DailyPlanGeneratorService,
+  private workoutService: WorkoutService) {}
 
 
   ngOnInit() {
@@ -89,25 +91,24 @@ export class AccountComponent implements OnInit {
     });
   }
 
-  testAssignmentWithObject() {
-    this.assignmentService.getAssignmentWithObject("asoaesjfoacnlk", (assignment) => {
+  testWorkoutWithObject() {
+    this.workoutService.getWorkoutWithObject("439jfajoejfw", (workout) => {
 
-      console.log(assignment);
-      console.log(assignment.exercise);
+      console.log(workout);
+      console.log(workout.exercise);
     });
   }
 
-  testAssignmentsWithObjects() {
-    console.log("hel");
-    this.assignmentService.getAssignmentsWithObjects(["asoaesjfoacnlk"], (assignments) => {
+  testWorkoutsWithObjects() {
+    this.workoutService.getWorkoutsWithObjects(["439jfajoejfw"], (workouts) => {
 
-      console.log(assignments);
+      console.log(workouts);
     });
   }
-  testAllAssignmentsWithObjects() {
-    this.assignmentService.getAllAssignmentsWithObjects((assignments) => {
+  testAllWorkoutsWithObjects() {
+    this.workoutService.getAllWorkoutsWithObjects((workouts) => {
 
-      console.log(assignments);
+      console.log(workouts);
     });
   }
 }

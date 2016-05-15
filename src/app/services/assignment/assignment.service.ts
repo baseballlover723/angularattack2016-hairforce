@@ -53,20 +53,14 @@ export class AssignmentService {
     var assignments = [];
     for (var index in ids) {
       var id = ids[index];
-      this.getAssignment(id, (assignment) => {
+      this.getAssignmentWithObject(id, (assignment) => {
         if (assignment) {
-          this.exerciseService.getExercise(assignment.exercise, (exercise) => {
-            assignment.exercise = exercise;
-            assignments.push(assignment);
-            if (ids.length == assignments.length) {
-              callback(assignments);
-            }
-          });
+          assignments.push(assignment);
         } else {
           ids.splice(parseInt(index), 1);
-          if (ids.length == assignments.length) {
-            callback(assignments);
-          }
+        }
+        if (ids.length == assignments.length) {
+          callback(assignments);
         }
       });
     }
