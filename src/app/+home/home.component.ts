@@ -37,6 +37,7 @@ export class HomeComponent implements OnInit {
         profile = new Profile(name, email, profilePic, sex);
         profile.facebookUid = authData.uid;
         this.profileService.addNewProfile(profile);
+        this.router.navigate(['/registration']);
       });
     });
   }
