@@ -30,9 +30,10 @@ import {DailyPlanGeneratorService} from "../services/dailyPlanGenerator/daily-pl
 })
 export class DashboardComponent implements OnInit {
   public workouts: Workout[];
+  public workoutKey: string;
 
 
-  constructor(private router: Router, private profileService: ProfileService, private dailyPlanGeneratorService: DailyPlanGeneratorService) {
+  constructor(private router: Router, private assignmentService: AssignmentService, private profileService: ProfileService, private workoutService: WorkoutService, private dailyPlanGeneratorService: DailyPlanGeneratorService) {
     if (profileService.getCurrentUser()) {
       this.router.navigate(['/dashboard']);
     } else {
@@ -57,8 +58,17 @@ export class DashboardComponent implements OnInit {
         //   }));
         //   this.workouts[1] = workout2;
         //   console.log("WO", this.workouts);
-        // }));
+        // // }));
+        // workout1.key = "ADFNU36ana9sh93ad"
+
+        // for(let assign in workout1.assignments){
+        //   this.assignmentService.addNewAssignment(assign, ());
+        // }
         this.workouts[0] = workout1;
+        // this.workoutService.addNewWorkout(workout1, ((workoutKey)=>{
+        //   this.workoutKey = workoutKey;
+        // }));
+
         console.log("WO", this.workouts);
       }));
     // }

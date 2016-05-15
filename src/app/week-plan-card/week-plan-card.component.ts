@@ -45,7 +45,11 @@ export class WeekPlanCardComponent implements OnInit {
   }
 
   startSession(){
-    this.router.navigate(['/session/' + this.workout['$key']]);
+    var tempWorkout = this.workoutService.getWorkoutWithObject("", (()=>{
+
+
+      this.router.navigate(['/session/' + this.workout['$key']]);
+    }));
   }
 
   startExercise(e){
