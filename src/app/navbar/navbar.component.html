@@ -3,7 +3,7 @@
 
         <a href="#" class="brand-logo hide-on-small-and-down">Get Unfat</a>
         <ul id="nav-mobile" class="right">
-            <li *ngIf="loginService.isLoggedIn()">{{currentUser.name}}</li>
+          <li *ngIf="profileService.getCurrentUser()">{{profileService.getCurrentUser().name}}</li>
             <li><a (click)="onGoToDashboard()"><i class="fa fa-calendar" aria-hidden="true"></i></a></li>
             <li><a (click)="onGoToStatistics()"><i class="fa fa-bar-chart" aria-hidden="true"></i></a></li>
             <li><a (click)="signOut()"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>

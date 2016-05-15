@@ -10,7 +10,8 @@ import {Exercise} from "../models/exercise";
   templateUrl: 'week-plan-card.component.html',
   styleUrls: ['week-plan-card.component.css'],
 
-  directives: [ExerciseTileComponent]
+  directives: [ExerciseTileComponent],
+  providers: [ExerciseService]
 })
 export class WeekPlanCardComponent implements OnInit {
   public exercises: Exercise[];

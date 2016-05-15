@@ -4,19 +4,28 @@
       "name" : "Philip Ross",
       "workouts" : ["asdfjalskfjles"],
       "pictureLink" : "https://avatars3.githubusercontent.com/u/7141827",
-      "friends" : ["alsjflskejfaasldfj"]
+      "friends" : ["alsjflskejfaasldfj"],
+      "facebookUid": "facebook:10209548035515367",
+      "googleUid": "google:105635380659938118548",
+      "githubUid": "github:7141827"
     },
     "alsjflskejfaasldfj" : {
       "name" : "Jeremy Wright",
       "workouts" : ["sadfejmekwkefwew", "asvasdvsavaewssefse"],
       "pictureLink" : "https://scontent-ord1-1.xx.fbcdn.net/v/t1.0-9/13151436_10207842809499962_2203436372500169200_n.jpg?oh=8f2b45cc6736dc80f890c0856c8580fe&oe=57A72DE3",
-      "friends" : ["sadlkjfadsjfsasadfsd", "asnclsjasejfsdlfselkj"]
+      "friends" : ["sadlkjfadsjfsasadfsd", "asnclsjasejfsdlfselkj"],
+      "facebookUid": "",
+      "googleUid": "",
+      "githubUid": ""
     },
     "asnclsjasejfsdlfselkj" : {
       "name" : "Andrew Ma",
       "workouts" : ["439jfajoejfw", "asvasdvsavaewssefse", "sadfejmekwkefwew", "asdfjalskfjles"],
       "pictureLink" : "https://scontent-ord1-1.xx.fbcdn.net/v/t1.0-9/12794506_10205928644277564_4347630166332558435_n.jpg?oh=006d1a465a31c9e1e58476b105682b6d&oe=57E67B47",
-      "friends" : ["alsjflskejfaasldfj"]
+      "friends" : ["alsjflskejfaasldfj"],
+      "facebookUid": "",
+      "googleUid": "",
+      "githubUid": ""
     }
   },
   "workouts" : {

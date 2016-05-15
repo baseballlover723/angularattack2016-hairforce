@@ -9,9 +9,9 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 export class UserInfoFormComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
-    $("#user-info-modal").openModal();
   }
   constructor() {
+    // $("#user-info-modal").openModal();
   }
 
 
