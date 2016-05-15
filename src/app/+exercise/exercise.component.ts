@@ -41,8 +41,6 @@ export class ExerciseComponent implements OnInit {
 
     routerOnActivate(curr:RouteSegment) {
         this.id = curr.getParam('id');
-        console.log(this.id);
-
     }
 
 }

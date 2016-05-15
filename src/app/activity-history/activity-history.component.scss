@@ -6,7 +6,13 @@
   max-height: 80vh;
   //left: 3.5%;
   /*max-height: 800px;*/
+
+	.card-content {
+		color: white;
+		padding: 10px 20px 20px 20px;
+	}
 }
+
 
 #activity-history::-webkit-scrollbar-track {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);

@@ -50,7 +50,6 @@ export class SessionListComponent implements OnInit {
                 for (let i = 0; i < this.assignments.length; i++) {
                     this.exerciseService.getExercise(assignments[i].exercise, (exercise) => {
                         this.assignments[i].exercise = exercise;
-                        console.log(this.assignments[i]);
                     });
                 }
             });

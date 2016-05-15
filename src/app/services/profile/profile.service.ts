@@ -68,6 +68,7 @@ export class ProfileService {
     delete profile.$key;
     const promise = this.af.object("/profiles/" + key).update(profile);
     promise.then(_ => {
+      profile.$key = key;
       callback(key);
     }).catch(err => {
       console.log(err);

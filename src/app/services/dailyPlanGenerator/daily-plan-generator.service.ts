@@ -241,13 +241,12 @@ export class DailyPlanGeneratorService {
 	}
 	wow(){
 		var stuff;
-		this.genWorkout(((val)=>{stuff = val; console.log("FINAL VALUES: ",val)}));
+		this.genWorkout(((val)=>{stuff = val;}));
 	}
 
 	// Recursive function to deal with Synchronous Callbacks
 	genWorkoutHelper(count: number, focuses, plan, cb){
 		if(count > 0){
-			console.log("focuses",focuses)
 			var foc = focuses[Math.floor(Math.random() * focuses.length)];
 			this.genAssignmentCB(foc["$value"], ((val)=>{
 				plan.push(val);
