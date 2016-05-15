@@ -110,7 +110,7 @@ export class DailyPlanGeneratorService {
 			var chosenRating = new ExerciseRating();
 			for(var i=0; i<person.ratings.length; i++){
 				console.log(person.ratings[i].targetExerciseKey);
-				if(person.ratings[i].targetExerciseKey == chosenExercise["$key"]){
+				if(person.ratings[i].targetExerciseKey == chosenExerciseKey){
 					chosenRating = person.ratings[i];
 					console.log("SUCCESS");
 				}
@@ -156,6 +156,7 @@ export class DailyPlanGeneratorService {
 	genWorkout(){
 		// Randomly choose a workout with that focus / Type
 		// TODO: Algorithmically determine pattern of main focus
+
 		var focuses = [];
 		return (new ExerciseService(this.af)).getAllTypes(((val) =>{
 			focuses = val;
@@ -164,21 +165,38 @@ export class DailyPlanGeneratorService {
 			var plan = [];
 			for(var i =0; i<focuses.length; i++){
 				var foc = focuses[Math.floor(Math.random() * focuses.length)];
-				plan.push(this.genAssignment(foc));
+				console.log("Generating workout for:",foc["$value"]);
+				plan.push(this.genAssignment(foc["$value"]));
 			}
-			for(var i =0; i<focuses.length; i++){
-				var foc = focuses[Math.floor(Math.random() * focuses.length)];
-				plan.push(this.genAssignment(mainFocus));
+
+			for(var i =0; i<3; i++){
+				// var foc = focuses[Math.floor(Math.random() * focuses.length)];
+				plan.push(this.genAssignment(mainFocus["$value"]));
 			}
 
 			// TODO: Maybe Improve shuffling for cardio at beginning/end
+			console.log("BEFORE SHUFFLING: ", plan)
 			var shuffled = this.shuffle(plan);
-			console.log(shuffled);
+			console.log("SHUFFLED: ",shuffled);
 
 			return shuffled;
 		}));
+	}
+
+	// Recursive function to deal with Synchronous Callbacks
+	genWorkoutHelper(){
 
 	}
+ 
+	promiseExample(){
+		var focuses = ["cardio", "strength"];
+		for(var i =0; i<focuses.length; i++){
+				var foc = focuses[Math.floor(Math.random() * focuses.length)];
+				console.log("Generating workout for:",foc["$value"]);
+				// plan.push(this.genAssignment(foc["$value"]));
+			}
+	}
+
 
 	genWeekPlan(Person){
 		// save plan for user
