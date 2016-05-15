@@ -7,6 +7,7 @@ import {Workout} from '../models/workout';
 import {WorkoutService} from "../services/workout/workout.service";
 import {AssignmentService} from "../services/assignment/assignment.service";
 import {Assignment} from "../models/assignment";
+import {MaterializeDirective} from 'angular2-materialize';
 
 @Component({
   moduleId: module.id,
@@ -15,13 +16,15 @@ import {Assignment} from "../models/assignment";
   styleUrls: ['week-plan-card.component.css'],
 
   directives: [ExerciseTileComponent],
-  providers: [WorkoutService, ExerciseService, AssignmentService]
+  providers: [WorkoutService, ExerciseService, AssignmentService, MaterializeDirective]
 })
 export class WeekPlanCardComponent implements OnInit {
   public exercises: Exercise[];
   private workout: Workout;
+  private assignments: Assignment[];
 
   constructor(private router: Router, private exerciseService: ExerciseService, private workoutService: WorkoutService, private assignmentService: AssignmentService) {
+
   }
 
   ngOnInit() {
@@ -29,14 +32,16 @@ export class WeekPlanCardComponent implements OnInit {
 
     this.workoutService.getWorkout('439jfajoejfw',(workout) => {
       this.workout = workout;
-        for(var a in this.workout.assignments){
-          this.assignmentService.getAssignment(String(this.workout.assignments[a]), (assignment) => {
-            this.exerciseService.getExercise(String(assignment.exercise), (exercise) => {
-              this.exercises.push(exercise);
-            });
+        // for(var a in this.workout.assignments){
+          this.assignmentService.getAssignments(workout.assignments, (assignments) => {
+            this.assignments = assignments;
+            for (let assignment of assignments) {
+              console.log(assignment, assignment.exercise);
+              this.exerciseService.getExercise(assignment.exercise, (exercise) => {
+                this.exercises.push(exercise);
+              });
+            }
           });
-         }
-
     });
   }
 

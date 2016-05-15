@@ -30,7 +30,7 @@ import {AccountComponent} from "./+account/account.component";
     {path: '/', component: HomeComponent},
     {path: "/dashboard", component: DashboardComponent},
     {path: '/session/:id', component: SessionListComponent},
-    {path: '/statistics', component: StatisticsComponent},
+    {path: '/statistics/:id', component: StatisticsComponent},
     {path: '/exercises/:id', component: ExerciseComponent},
     {path: '/registration', component: UserInfoFormComponent},
     {path: '/account', component: AccountComponent}

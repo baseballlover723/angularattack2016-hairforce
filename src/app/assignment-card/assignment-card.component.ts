@@ -15,6 +15,16 @@ export class AssignmentCardComponent implements OnInit {
   }
 
   ngOnInit() {
+
+  }
+
+  completeSet() {
+    this.assignment.completed = !this.assignment.completed;
+  }
+
+  favoriteExercise() {
+    // To be implemented
+    console.log("Favorited");
   }
 
 }

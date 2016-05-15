@@ -16,7 +16,6 @@ export class ExerciseService {
         callback(false);
         return;
       }
-      // console.log("getting exercise: " + id);
       exercise.$key = id;
       callback(exercise);
       return;
@@ -77,7 +76,6 @@ export class ExerciseService {
   updateExercise(exercise: Exercise, callback = (exerciseKey) => {}) {
     let key = exercise["$key"];
     delete exercise["$key"];
-    // console.log(exercise);
     const promise = this.af.object("/exercises/" + key).update(exercise);
     promise.then(_ => {
       callback(key);
