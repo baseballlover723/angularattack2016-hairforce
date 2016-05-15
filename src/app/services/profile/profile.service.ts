@@ -2,6 +2,10 @@ import {Injectable} from "@angular/core";
 import {AngularFire} from "angularfire2";
 import {Observable} from "rxjs/Observable";
 import {Profile} from "../../models/profile";
+import {Exercise} from "../../models/exercise";
+import {ExerciseRating} from "../../models/exerciserating";
+
+
 
 @Injectable()
 export class ProfileService {
@@ -121,5 +125,13 @@ export class ProfileService {
 
   linkGithub() {
     this.link("github");
+  }
+
+  getRating(exercise: Exercise){
+    for(var i; i < this.getCurrentUser().ratings.length; i++){
+      if(this.getCurrentUser().ratings[i].targetExercise == exercise){
+        return this.getCurrentUser().ratings[i];
+      }
+    }
   }
 }

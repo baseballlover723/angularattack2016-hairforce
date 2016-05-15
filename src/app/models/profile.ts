@@ -1,4 +1,5 @@
 import {Workout} from "./workout";
+import {ExerciseRating} from "./exerciserating";
 
 /**
  * A user's profile.
@@ -7,6 +8,7 @@ export class Profile {
 
     name: string;
     profilePic: string;
+    ratings: ExerciseRating[];
     workouts: Workout[];
     friends: string[];
     favorites: string[];

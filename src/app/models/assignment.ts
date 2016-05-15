@@ -9,5 +9,4 @@ export class Assignment {
     repititions: number;
     sets: number;
     weight: number;
-
 }

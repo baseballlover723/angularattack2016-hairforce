@@ -11,6 +11,10 @@ export class Exercise {
     instructions: string;
     substitutions: string[];
     intensity: number;
+    repetitions: number;
+    sets: number;
+    time: number;
+    weight: number;
     type: string;
     typeUrl: string;
 }
