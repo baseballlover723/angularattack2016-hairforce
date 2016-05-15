@@ -1,12 +1,14 @@
 <nav>
     <div class="nav-wrapper">
 
-        <a href="#" class="brand-logo hide-on-small-and-down">Get Unfat</a>
+        <a (click)="onGoToHome()" class="brand-logo hide-on-small-and-down">Git Fit</a>
         <ul id="nav-mobile" class="right">
-          <li *ngIf="profileService.getCurrentUser()">{{profileService.getCurrentUser().name}}</li>
-            <li><a (click)="onGoToDashboard()"><i class="fa fa-calendar" aria-hidden="true"></i></a></li>
-            <li><a (click)="onGoToStatistics()"><i class="fa fa-bar-chart" aria-hidden="true"></i></a></li>
-            <li><a (click)="signOut()"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+            <div *ngIf="profileService.getCurrentUser()">
+                <li><a (click)="onGoToAccount()"><i class="fa fa-user"></i> {{profileService.getCurrentUser().name}}</a></li>
+                <li><a (click)="onGoToDashboard()"><i class="fa fa-calendar" aria-hidden="true"></i></a></li>
+                <!--<li><a (click)="onGoToStatistics()"><i class="fa fa-bar-chart" aria-hidden="true"></i></a></li>-->
+                <li><a (click)="signOut()"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+            </div>
         </ul>
     </div>
 </nav>
